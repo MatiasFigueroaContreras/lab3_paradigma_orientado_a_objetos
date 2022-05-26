@@ -18,7 +18,7 @@ public class CardsSet {
     }
     
     public Card nthCard(int n){
-        return this.cardsSet.get(n);
+        return this.cardsSet.get(n-1);
     }
     
     public int numCards(){

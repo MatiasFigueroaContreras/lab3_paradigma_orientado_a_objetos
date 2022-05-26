@@ -4,27 +4,16 @@
  */
 package lab3_paradigma_orientado_a_objetos;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author emdma
  */
-public class Card {
-    ArrayList<Element> card = new ArrayList<>();
-    
-    public Element nthElement(int n){
-        return this.card.get(n);
-    }
-    
-    public int numElements(){
-        return this.card.size();
-    }
+public class Card extends ElementsSet{
     
     public boolean equals(Card c){
         if (this.numElements() == c.numElements()){
             for(int i = 0; i < c.numElements(); i++){
-                if(!this.card.contains(c.nthElement(i))){
+                if(!this.elementsSet.contains(c.nthElement(i))){
                     return false;
                 }
             }
@@ -38,7 +27,7 @@ public class Card {
     public int commonElements(Card c){
         int cont = 0;
         for(int i = 0; i < c.numElements(); i++){
-            if(this.card.contains(c.nthElement(i))){ // funciona el contains con el element?
+            if(this.elementsSet.contains(c.nthElement(i))){ // funciona el contains con el element?
                 cont++;
             }
         }
@@ -47,25 +36,6 @@ public class Card {
     
     public boolean oneCommonElement(Card c){
         int commonE = this.commonElements(c);
-        if(commonE == 1){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-    
-    public void insertElement(Element e){
-        this.card.add(e);
-    }
-    
-    @Override
-    public String toString(){
-        String str = "";
-        int i;
-        for(i = 0; i < this.numElements() - 1; i++){
-            str = str + this.nthElement(i).toString() + ",";
-        }
-        return str + this.nthElement(i);
+        return commonE == 1;
     }
 }
