@@ -11,9 +11,9 @@ package lab3_paradigma_orientado_a_objetos;
 public class Card extends ElementsSet{
     
     public boolean equals(Card c){
-        if (this.numElements() == c.numElements()){
-            for(int i = 0; i < c.numElements(); i++){
-                if(!this.elementsSet.contains(c.nthElement(i))){
+        if (numElements() == c.numElements()){
+            for(int i = 1; i <= c.numElements(); i++){
+                if(!contains(c.nthElement(i))){
                     return false;
                 }
             }
@@ -26,8 +26,9 @@ public class Card extends ElementsSet{
     
     public int commonElements(Card c){
         int cont = 0;
-        for(int i = 0; i < c.numElements(); i++){
-            if(this.elementsSet.contains(c.nthElement(i))){ // funciona el contains con el element?
+        for(int i = 1; i <= c.numElements(); i++){
+            
+            if(contains(c.nthElement(i))){
                 cont++;
             }
         }
@@ -35,7 +36,7 @@ public class Card extends ElementsSet{
     }
     
     public boolean oneCommonElement(Card c){
-        int commonE = this.commonElements(c);
+        int commonE = commonElements(c);
         return commonE == 1;
     }
 }

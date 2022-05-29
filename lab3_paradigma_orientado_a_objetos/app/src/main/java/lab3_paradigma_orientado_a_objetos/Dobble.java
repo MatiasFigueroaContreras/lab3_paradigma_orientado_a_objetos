@@ -39,41 +39,38 @@ public class Dobble {
     }
     
     private void nCardsGeneration(int n, int maxC){
-        Card card = new Card();
-        for(int i = 1; i <= n; i++){
-            if(maxC > 0){
-                card.clearOut();
-                card.insertElement(this.elements.nthElement(1));
+        for(int i = 1; i <= n && maxC > 0; i++, maxC--){
+            Card card = new Card();
+            card.insertElement(this.elements.nthElement(1));
 
-                for(int j = 1; j <= n; j++){
-                    card.insertElement(this.elements.nthElement(n*i + (j+1)));
-                }
-                this.dobbleCS.insertCard(card);
-                maxC--;
+            for(int j = 1; j <= n; j++){
+                card.insertElement(this.elements.nthElement(n*i + (j+1)));
             }
-            else{
-                return;
-            }
+            this.dobbleCS.insertCard(card);
         }
     }
     
     private void n2CardsGeneration(int n, int maxC){
-        Card card = new Card();
         for(int i = 1; i <= n; i++){
-            for(int j = 1; j <= n; j++){
-                if(maxC > 0){
-                    card.clearOut();
-                    card.insertElement(this.elements.nthElement(i+1));
-                    for(int k = 1; k <= n; k++){
-                        card.insertElement(this.elements.nthElement(n+2+n*(k-1)+(((i-1)*(k-1)+j-1)%n)));
-                    }
-                    this.dobbleCS.insertCard(card);
-                    maxC--;
+            for(int j = 1; j <= n && maxC > 0; j++, maxC--){
+                Card card = new Card();
+                card.insertElement(this.elements.nthElement(i+1));
+                for(int k = 1; k <= n; k++){
+                    card.insertElement(this.elements.nthElement(n+2+n*(k-1)+(((i-1)*(k-1)+j-1)%n)));
                 }
-                else{
-                    return;
-                }
+                this.dobbleCS.insertCard(card);
             }
         }
     }
+    
+    @Override
+    public String toString(){
+        return "Elements:\n" + this.elements.toString() + "\nCards:\n" + this.dobbleCS.toString();
+    }
+    
+    public boolean equals(Dobble d){
+        return d.dobbleCS.equals(this.dobbleCS);
+    }
+    
+    
 }

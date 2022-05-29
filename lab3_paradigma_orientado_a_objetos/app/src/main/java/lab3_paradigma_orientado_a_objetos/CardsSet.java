@@ -26,17 +26,17 @@ public class CardsSet {
     }
     
     public void union(CardsSet cS){
-        for(int i = 0; i < cS.numCards(); i++){
-            this.insertCard(cS.nthCard(i));
+        for(int i = 1; i <= cS.numCards(); i++){
+            insertCard(cS.nthCard(i));
         }
     }
     
     @Override
     public String toString(){
         String str = "";
-        for(int i = 0; i < this.numCards(); i++){
-            String n = Integer.toString(i + 1) + ":";
-            str = "Card n°" + n + this.nthCard(i).toString() + "\n";
+        for(int i = 1; i <= numCards(); i++){
+            String n = Integer.toString(i) + ": ";
+            str += "Card n" + n + nthCard(i).toString() + "\n";
         }
         return str;
     }
