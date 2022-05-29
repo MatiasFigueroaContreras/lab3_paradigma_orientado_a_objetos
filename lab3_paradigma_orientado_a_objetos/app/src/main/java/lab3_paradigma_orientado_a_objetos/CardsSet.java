@@ -31,6 +31,14 @@ public class CardsSet {
         }
     }
     
+    public void remove(int n){
+        this.cardsSet.remove(n-1);
+    }
+    
+    public void remove(Card c){
+        this.cardsSet.remove(c);
+    }
+    
     @Override
     public String toString(){
         String str = "";

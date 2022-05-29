@@ -25,13 +25,13 @@ public class ElementsSet {
         this.elementsSet.add(e);
     }
     
-    public void delete(int n){
+    public void remove(int n){
         this.elementsSet.remove(n-1);
     }
     
-    public void delete(Element e){
+    public void remove(Element e){
         this.elementsSet.remove(e);
-    }   
+    }
     
     public void clearOut(){
         this.elementsSet.clear();

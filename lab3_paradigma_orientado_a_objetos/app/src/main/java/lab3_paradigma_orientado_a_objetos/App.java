@@ -44,9 +44,9 @@ public class App {
         System.out.println(eS.toString());
         eS.insertXElements(5);
         System.out.println(eS.toString());
-        eS.delete(e2);
+        eS.remove(e2);
         System.out.println(eS.toString());
-        eS.delete(1);
+        eS.remove(1);
         System.out.println(eS.toString());
         eS.clearOut();
         System.out.println(eS.toString());
@@ -98,6 +98,7 @@ public class App {
         eSD.insertXElements(7);
         Dobble d = new Dobble(eSD, 3, 7, 3);
         System.out.println(d.toString());
+        
         
     }
 }
