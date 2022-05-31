@@ -60,4 +60,42 @@ public class PlayersGameControl {
     public void nextTurn(){
         this.playerTurn++;
     }
+    
+    private int highestScore(){
+        int h = nthPlayer(1).score;
+        for(int i = 2; i <= getTotalPlayers(); i++){
+            int nScore = nthPlayer(i).score;
+            if(h < nScore){
+                h = nScore;
+            }
+        }
+        
+        return h;
+    }
+    
+    public ArrayList<String> getWinners(){
+        int h = highestScore();
+        ArrayList<String> winners = new ArrayList<>();
+        for(int i = 1; i <= getTotalPlayers(); i++){
+            Player nPlayer = nthPlayer(i);
+            if(h == nPlayer.score){
+                winners.add(nPlayer.name);
+            }
+        }
+        return winners;
+    }
+    
+    public ArrayList<String> getLosers(){
+        int h = highestScore();
+        ArrayList<String> losers = new ArrayList<>();
+        for(int i = 1; i <= getTotalPlayers(); i++){
+            Player nPlayer = nthPlayer(i);
+            if(h > nPlayer.score){
+                losers.add(nPlayer.name);
+            }
+        }
+        return losers;
+    }
+    
+    
 }
