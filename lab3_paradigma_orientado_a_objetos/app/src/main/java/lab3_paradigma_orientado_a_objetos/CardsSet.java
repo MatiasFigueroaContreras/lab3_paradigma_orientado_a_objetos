@@ -39,6 +39,16 @@ public class CardsSet {
         this.cardsSet.remove(c);
     }
     
+    public int elementOccurrences(Element e){
+        int count = 0;
+        for(int i = 1; i <= numCards(); i++){
+            if(nthCard(i).contains(e)){
+                count++;
+            }
+        }
+        return count;
+    }
+    
     @Override
     public String toString(){
         String str = "";
