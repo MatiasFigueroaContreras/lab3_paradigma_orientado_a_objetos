@@ -4,6 +4,7 @@
  */
 package lab3_paradigma_orientado_a_objetos;
 
+import static com.google.common.math.IntMath.isPrime;
 import java.util.ArrayList;
 
 /**
@@ -14,16 +15,20 @@ public class Dobble {
     CardsSet dobbleCS = new CardsSet();
     ElementsSet elements;
             
-    public Dobble(ElementsSet eS, int numE, int maxC, int seed){
+    public Dobble(ElementsSet eS, int numE, int maxC){
         int n = numE - 1;
-        
-        if(eS.numElements() < totalCardsNumE(numE)){
-            eS.insertXElements(totalCardsNumE(numE) - eS.numElements());
+        if(isPrime(numE)){
+            if(eS.numElements() < totalCardsNumE(numE)){
+                eS.insertXElements(totalCardsNumE(numE) - eS.numElements());
+            }
+            if(maxC <= 0){
+                maxC = totalCardsNumE(numE);
+            }
+            this.elements = eS;
+            firstCardGeneration(n);
+            nCardsGeneration(n, maxC-1);
+            n2CardsGeneration(n, maxC-n-1);
         }
-        this.elements = eS;
-        firstCardGeneration(n);
-        nCardsGeneration(n, maxC-1);
-        n2CardsGeneration(n, maxC-n-1);
     }
     
     private int totalCardsNumE(int numE){
@@ -62,6 +67,23 @@ public class Dobble {
             }
         }
     }
+    
+    public int findTotalCards(Card c){
+        return totalCardsNumE(c.numElements());
+    }
+    
+    public int requiredElements(Card c){
+        return totalCardsNumE(c.numElements());
+    }
+    
+    public CardsSet missingCards(){
+        int numE = this.dobbleCS.nthCard(1).numElements();
+        Dobble fullDobble = new Dobble(this.elements, numE, 0);
+        fullDobble.dobbleCS.subtract(this.dobbleCS);
+        return fullDobble.dobbleCS;
+    }
+    
+    
     
     @Override
     public String toString(){

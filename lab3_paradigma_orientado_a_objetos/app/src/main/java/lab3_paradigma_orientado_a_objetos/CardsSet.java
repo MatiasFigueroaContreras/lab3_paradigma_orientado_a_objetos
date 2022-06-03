@@ -31,12 +31,22 @@ public class CardsSet {
         }
     }
     
+    public void subtract(CardsSet cS){
+        for(int i = 1; i <= cS.numCards(); i++){
+            remove(cS.nthCard(i));
+        }
+    }
+    
     public void remove(int n){
         this.cardsSet.remove(n-1);
     }
     
     public void remove(Card c){
-        this.cardsSet.remove(c);
+        for(int i = 1; i <= numCards(); i++){
+            if(c.equals(nthCard(i))){
+                remove(i);
+            }
+        }
     }
     
     public int elementOccurrences(Element e){
