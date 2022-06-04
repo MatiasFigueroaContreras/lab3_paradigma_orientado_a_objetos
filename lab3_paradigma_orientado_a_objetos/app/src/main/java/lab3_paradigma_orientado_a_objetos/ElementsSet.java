@@ -11,7 +11,26 @@ import java.util.ArrayList;
  * @author emdma
  */
 public class ElementsSet {
-    ArrayList<Element> elementsSet = new ArrayList<>();
+    private ArrayList<Element> elementsSet = new ArrayList<>();
+    
+    public ArrayList<Element> getElements(){
+        ArrayList<Element> eSCopy = new ArrayList<>(this.elementsSet);
+        return eSCopy;
+    }
+    
+    public void setElements(ArrayList<Element> newElements){
+        if(isElementsSet(newElements)){
+            this.elementsSet = new ArrayList<Element>(newElements);
+        }
+    }
+
+    private boolean isElementsSet(ArrayList<Element> elements){
+        ElementsSet eSCo = new ElementsSet();
+        for(int i = 0; i < elements.size(); i++){
+            eSCo.add(elements.get(i));
+        }
+        return eSCo.numElements() == elements.size();
+    }
     
     public Element nthElement(int n){
         return this.elementsSet.get(n-1);
@@ -21,8 +40,10 @@ public class ElementsSet {
         return this.elementsSet.size();
     }
     
-    public void insertElement(Element e){
-        this.elementsSet.add(e);
+    public void add(Element e){
+        if(!contains(e)){
+           this.elementsSet.add(e);
+        }
     }
     
     public void remove(int n){
@@ -44,7 +65,7 @@ public class ElementsSet {
                 x++;
             }
             else{
-                insertElement(eX);
+                add(eX);
             }
         }
     }
@@ -70,6 +91,20 @@ public class ElementsSet {
         }
         else{
             return str;
+        }
+    }
+    
+    public boolean equals(ElementsSet eS){
+        if (numElements() == eS.numElements()){
+            for(int i = 1; i <= eS.numElements(); i++){
+                if(!contains(eS.nthElement(i))){
+                    return false;
+                }
+            }
+            return true;
+        }
+        else{
+            return false;
         }
     }
 }

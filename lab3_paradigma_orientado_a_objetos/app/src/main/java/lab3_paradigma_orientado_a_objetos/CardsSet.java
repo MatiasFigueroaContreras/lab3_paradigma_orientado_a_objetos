@@ -11,10 +11,31 @@ import java.util.ArrayList;
  * @author emdma
  */
 public class CardsSet {
-    ArrayList<Card> cardsSet = new ArrayList<>();
+    private ArrayList<Card> cardsSet = new ArrayList<>();
     
-    public void insertCard(Card c){
-        this.cardsSet.add(c);
+    public ArrayList<Card> getCards(){
+        ArrayList<Card> cSCopy = new ArrayList<>(this.cardsSet);
+        return cSCopy;
+    }
+    
+    public void setCards(ArrayList<Card> newCards){
+        if(isCardsSet(newCards)){
+            this.cardsSet = new ArrayList<Card>(newCards);
+        }
+    }
+    
+    private boolean isCardsSet(ArrayList<Card> cards){
+        CardsSet cSCo = new CardsSet();
+        for(int i = 0; i < cards.size(); i++){
+            cSCo.add(cards.get(i));
+        }
+        return cSCo.numCards() == cards.size();
+    }
+    
+    public void add(Card c){
+        if(!contains(c)){
+           this.cardsSet.add(c);
+        }
     }
     
     public Card nthCard(int n){
@@ -27,7 +48,7 @@ public class CardsSet {
     
     public void union(CardsSet cS){
         for(int i = 1; i <= cS.numCards(); i++){
-            insertCard(cS.nthCard(i));
+            add(cS.nthCard(i));
         }
     }
     
@@ -47,6 +68,15 @@ public class CardsSet {
                 remove(i);
             }
         }
+    }
+    
+    public boolean contains(Card c){
+        for(int i = 1; i <= numCards(); i++){
+            if(c.equals(nthCard(i))){
+                return true;
+            }
+        }
+        return false;
     }
     
     public int elementOccurrences(Element e){
