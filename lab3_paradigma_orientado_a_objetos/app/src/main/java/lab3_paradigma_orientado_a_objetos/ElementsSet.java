@@ -79,6 +79,15 @@ public class ElementsSet {
         return false;
     }
     
+    public int elementIndex(Element e){
+        for(int i = 1; i <= numElements(); i++){
+            if(e.equals(nthElement(i))){
+                return i;
+            }
+        }
+        return -1;
+    }
+    
     @Override
     public String toString(){
         String str = "";
