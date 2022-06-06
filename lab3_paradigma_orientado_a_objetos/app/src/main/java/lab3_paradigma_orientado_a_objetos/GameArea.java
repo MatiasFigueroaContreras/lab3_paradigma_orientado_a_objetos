@@ -9,8 +9,8 @@ package lab3_paradigma_orientado_a_objetos;
  * @author emdma
  */
 public class GameArea {
-    Dobble dobbleSet;
-    CardsSet cardsInPlay = new CardsSet();
+    private Dobble dobbleSet;
+    private CardsSet cardsInPlay = new CardsSet();
     
     public GameArea(Dobble dS){
         this.dobbleSet = dS;

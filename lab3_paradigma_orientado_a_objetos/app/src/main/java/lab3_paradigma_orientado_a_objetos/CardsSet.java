@@ -70,6 +70,10 @@ public class CardsSet {
         }
     }
     
+    public void clear(){
+        this.cardsSet.clear();
+    }
+    
     public boolean contains(Card c){
         for(int i = 1; i <= numCards(); i++){
             if(c.equals(nthCard(i))){

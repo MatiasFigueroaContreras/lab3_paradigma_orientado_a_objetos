@@ -9,8 +9,12 @@ package lab3_paradigma_orientado_a_objetos;
  * @author emdma
  */
 public interface Mode {
-    public void start(DobbleGame dG);
-    public void pass(DobbleGame dG);
-    public void setCardsInPlay(DobbleGame dG);
+    public String playsOptionMenu();
+    public String playOption(DobbleGame dGame, int option);
+    public String playOption(DobbleGame dGame, int option, Element e);
+    public String start(DobbleGame dG);
+    public String getVersionModeName();
     public String getModeName();
+    public int getMaxPlayers();
+    public int getMinPlayers();
 }

@@ -30,7 +30,7 @@ public class Player {
         this.score = s;
     }
     
-    public void setCardsSet(CardsSet cS){
+    public void setCards(CardsSet cS){
         this.cards = cS;
     }
     
@@ -42,7 +42,7 @@ public class Player {
         return this.score;
     }
     
-    public CardsSet getCardsSet(){
+    public CardsSet getCards(){
         return this.cards;
     }
     

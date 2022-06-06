@@ -166,9 +166,9 @@ public class Dobble {
     }
     
     private boolean addElementsAppearences(Card c, int[] elementsA){
-        for(int i = 1; i <= c.numElements(); i++){
+        for(int i = 1; i <= c.numElements(); i++){      
             int eIndex = this.elements.elementIndex(c.nthElement(i)) - 1;
-            if(eIndex == -1 && (elementsA[eIndex] + 1) > this.numE){
+            if(eIndex <= -1 || (elementsA[eIndex] + 1) > this.numE){
                 return false;
             }
             else{
@@ -201,7 +201,7 @@ public class Dobble {
     }
     
     public boolean isValidCard(Card c){
-        for(int i = 0; i <= this.dobbleCS.numCards(); i++){
+        for(int i = 1; i <= this.dobbleCS.numCards(); i++){
             if(!this.dobbleCS.nthCard(i).oneCommonElement(c)){
                 return false;
             }
@@ -209,8 +209,13 @@ public class Dobble {
         return true;
     }
     
+    public Card nthCard(int i){
+        return this.dobbleCS.nthCard(i);
+    }
+    
     public void addCard(Card c){
         if(completeNumElements()){
+            System.out.println();
             int[] copyEA = this.elementsAppareances.clone();
             if(addElementsAppearences(c, copyEA)){
                 if(isValidCard(c)){

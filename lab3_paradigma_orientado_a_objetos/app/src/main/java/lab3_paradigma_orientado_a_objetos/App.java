@@ -3,6 +3,8 @@
  */
 package lab3_paradigma_orientado_a_objetos;
 
+import java.util.ArrayList;
+
 public class App {
     public String getGreeting() {
         return "Hello World!";
@@ -34,10 +36,10 @@ public class App {
         System.out.println("\nElementsSet:");
         ElementsSet eS = new ElementsSet();
         
-        eS.insertElement(e1);
-        eS.insertElement(e2);
+        eS.add(e1);
+        eS.add(e2);
         e3.element = "3";
-        eS.insertElement(e3);
+        eS.add(e3);
         
         System.out.println(eS.numElements());
         System.out.println(eS.nthElement(3).toString());
@@ -53,8 +55,23 @@ public class App {
         eS.insertXElements(4);
         System.out.println(eS.toString());
         System.out.println(eS.contains(e3));
-
         
+        Element e = new Element("10");
+        
+        ArrayList<Element> r = eS.getElements();
+        r.add(e3);
+        r.add(e);
+        System.out.println(r);
+        System.out.println(eS.toString());
+        eS.add(e3);
+        System.out.println(eS.toString());
+        eS.setElements(r);
+        System.out.println(eS.toString());
+        ArrayList<Element> p = eS.getElements();
+        p.add(e);
+        eS.setElements(p);
+        System.out.println(eS.toString());
+
         //Prueba de Card
         System.out.println("\nCard:");
         Card c1 = new Card();
@@ -69,11 +86,11 @@ public class App {
         
         System.out.println(c1.oneCommonElement(c2));
         Card c3 = new Card();
-        c3.insertElement(e1);
+        c3.add(e1);
         Element e4 = new Element(4);
         Element e5 = new Element(5);
-        c3.insertElement(e4);
-        c3.insertElement(e5);
+        c3.add(e4);
+        c3.add(e5);
         System.out.println(c1.oneCommonElement(c3));
 
         System.out.println(c1.equals(c2));
@@ -86,19 +103,77 @@ public class App {
         //Para CardsSet
         System.out.println("\nCardsSet:");
         CardsSet cS = new CardsSet();
-        cS.insertCard(c1);
-        cS.insertCard(c3);
+        cS.add(c1);
+        cS.add(c3);
         System.out.println(cS.numCards());
         System.out.println(cS.nthCard(1));
+        System.out.println(cS.toString());
+        CardsSet cS2 = new CardsSet();
+        cS2.add(c1);
+        cS.subtract(cS2);
         System.out.println(cS.toString());
         
         //Para Dobble
         System.out.println("\nDobble:");
         ElementsSet eSD = new ElementsSet();
         eSD.insertXElements(7);
-        Dobble d = new Dobble(eSD, 3, 7, 3);
+        Dobble d = new Dobble(eSD, 3, 7);
         System.out.println(d.toString());
+        Dobble d2 = new Dobble(eSD, 3, 4);
+        System.out.println(d2.toString());
+        System.out.println(d2.missingCards().toString());
+        System.out.println(d2.toString());
+        System.out.println(d2.toString());
+
         
-        
+       int z = 3;
+       int j = z;
+       j++;
+       System.out.println(z);
+       
+       int[] prueba = new int[]{1, 2, 3, 4};
+       int[] prueba2 = prueba.clone();
+       prueba2[0]++;
+       prueba2[1]++;
+       prueba2[2]--;
+        System.out.println("\n");
+       for(int i = 0; i < prueba.length; i++){
+           System.out.println(prueba[i]);
+       }
+       System.out.println("\n");
+       for(int aa = 0; aa < prueba2.length; aa++){
+           System.out.println(prueba2[aa]);
+       }
+       
+       Dobble dp = new Dobble(3);
+       dp.setElements(eS);
+       Element n5 = new Element(5);
+       Element n6 = new Element(6);
+       dp.addElement(n5);
+       dp.addElement(n6);
+       dp.addCard(c1);
+       dp.addCard(c3);
+       dp.addCard(c1);
+       System.out.println(dp.toString());
+       dp.removeCard(c1);
+       dp.removeCard(1);
+       System.out.println(dp.toString());
+       CardsSet cSDobble = d2.getDobbleCards();
+       ElementsSet cSElements = d2.getElements();
+       System.out.println(cSDobble.toString());
+       dp.setElements(cSElements);
+       dp.setDobbleCards(cSDobble);
+       System.out.println(dp.toString());
+       Element n8 = new Element(8);
+       dp.addElement(n8);
+       Element n2 = new Element(2);
+       Element n7 = new Element(7);
+       Card nCard = new Card();
+       nCard.add(n2);
+       nCard.add(n5);
+       nCard.add(n7);
+       dp.addCard(nCard);
+       System.out.println(dp.toString());
+       
     }
 }

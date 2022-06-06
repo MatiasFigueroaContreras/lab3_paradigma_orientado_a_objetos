@@ -11,9 +11,9 @@ import java.util.ArrayList;
  * @author emdma
  */
 public class PlayersGameControl {
-    int maxPlayers;
-    int playerTurn;
-    ArrayList<Player> players = new ArrayList<>();
+    public int maxPlayers;
+    public int playerTurn;
+    public ArrayList<Player> players = new ArrayList<>();
     
     public PlayersGameControl(int mP){
         if(mP >= 1){
@@ -26,6 +26,14 @@ public class PlayersGameControl {
         return this.players.size();
     }
     
+    public void addScoreCurrentPlayerTurn(int score){
+        nthPlayer(this.playerTurn).addScore(score);
+    }
+    
+    public void addCardsCurrentPlayerTurn(CardsSet cards){
+        nthPlayer(this.playerTurn).setCards(cards);
+    }
+        
     public void addPlayer(Player p){
         if(getTotalPlayers() < this.maxPlayers && !contains(p)){
             this.players.add(p);
@@ -97,5 +105,13 @@ public class PlayersGameControl {
         return losers;
     }
     
-    
+    @Override
+    public String toString(){
+        String str = "";
+        for(int i = 1; i <= getTotalPlayers(); i++){
+            String n = Integer.toString(i) + ": ";
+            str += "Player n" + n + nthPlayer(i).toString() + "\n";
+        }
+        return str;
+    }
 }
