@@ -10,15 +10,19 @@ package lab3_paradigma_orientado_a_objetos;
  */
 public abstract class Stack implements Mode{
     
-    public String getNameMode(){
+    public String getModeName(){
         return "Stack";
     }
     
-    private boolean spotIt(Element e, CardsSet cS){
+    public int numExtraDataNeeded(DobbleGame dGame){
+        return 1;
+    }
+    
+    protected boolean spotIt(Element e, CardsSet cS){
         return cS.elementOccurrences(e) >= 2;
     }
     
-    private void setCardsToPlay(DobbleGame dG){
+    protected void setCardsToPlay(DobbleGame dG){
         CardsSet cards = dG.gameArea.getCardsInPlay();
         Dobble dCards = dG.gameArea.getDobbleSet();
         for(int i = 1; i <= 2; i++){
@@ -28,7 +32,7 @@ public abstract class Stack implements Mode{
         
     }
     
-    private void backCardsInPlay(DobbleGame dG){
+    protected void backCardsInPlay(DobbleGame dG){
         CardsSet cards = dG.gameArea.getCardsInPlay();
         Dobble dCards = dG.gameArea.getDobbleSet();
         for(int i = 1; i <= 2; i++){
@@ -38,7 +42,7 @@ public abstract class Stack implements Mode{
         }
     }
     
-    private void pass(DobbleGame dG){
+    protected void pass(DobbleGame dG){
         if(dG.getStatus().equals("SpotIt")){
             CardsSet cardsInPlay = dG.gameArea.getCardsInPlay();
             dG.playersGameControl.addScoreCurrentPlayerTurn(cardsInPlay.numCards());

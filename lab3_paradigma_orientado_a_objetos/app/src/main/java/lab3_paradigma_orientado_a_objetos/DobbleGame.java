@@ -28,19 +28,34 @@ public class DobbleGame {
         }
     }
     
-    public void play(int option){
+    public boolean play(int option){
         if(!this.status.equals("Juego Terminado") && !this.status.equals("Esperando inicio del juego")){
-            this.status = mode.playOption(this, option);
-        }    
-    }
-    
-    public void play(int option, String element){
-        if(!this.status.equals("Juego Terminado") && !this.status.equals("Esperando inicio del juego")){
-            Element e = new Element(element);
-            this.status = mode.playOption(this, option, e);
+            String newStatus = mode.playOption(this, option);
+            if(newStatus == null){
+                return false;
+            }
+            else{
+                this.status = newStatus;
+                return true;
+            }
         }
+        return false;
     }
     
+    public boolean play(int option, String[] data){
+        if(!this.status.equals("Juego Terminado") && !this.status.equals("Esperando inicio del juego")){
+            String newStatus = mode.playOption(this, option, data);
+            if(newStatus == null){
+                return false;
+            }
+            else{
+                this.status = newStatus;
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void finish(){
         this.status = "Juego Terminado";
     }
@@ -66,8 +81,21 @@ public class DobbleGame {
         return this.mode.getVersionModeName();
     }
     
+    public String getExtraDataNeeded(int option){
+        return this.mode.extraDataNeeded(this.status, option);
+    }
+    
+    public int getNumExtraDataNeded(){
+        return this.mode.numExtraDataNeeded(this);
+    }
+    
     public String getStatus(){
-        return this.status;
+        String statusCopy = new String(this.status);
+        return statusCopy;
+    }
+    
+    protected void setStatus(String newStatus){
+        this.status = new String(newStatus);
     }
         
     public String cardsInPlayString(){
@@ -75,7 +103,7 @@ public class DobbleGame {
     }
     
     public String getPlaysOptions(){
-        return this.mode.playsOptionMenu();
+        return this.mode.playsOptionMenu(this.status);
     }
     
     public String toString(){
