@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author emdma
  */
-public class Dobble {
+public class Dobble implements IDobble{
     private CardsSet dobbleCS = new CardsSet();
     private ElementsSet elements;
     private int numE;
@@ -135,7 +135,7 @@ public class Dobble {
         }
     }
     
-    public boolean completeNumElements(){
+    private boolean completeNumElements(){
         return this.elements.numElements() == totalCardsNumE(numE);
     }
     
@@ -235,7 +235,6 @@ public class Dobble {
         this.dobbleCS.remove(c);
         resElementsAppearences(c);
     }
-    
     
     public void addElement(Element e){
         if(!completeNumElements()){

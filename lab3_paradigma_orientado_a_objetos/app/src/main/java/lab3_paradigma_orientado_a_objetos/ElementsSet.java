@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author emdma
  */
-public class ElementsSet {
+public class ElementsSet implements IElementsSet{
     private ArrayList<Element> elementsSet = new ArrayList<>();
     
     public ArrayList<Element> getElements(){
@@ -54,7 +54,7 @@ public class ElementsSet {
         this.elementsSet.remove(e);
     }
     
-    public void clearOut(){
+    public void clear(){
         this.elementsSet.clear();
     }
     

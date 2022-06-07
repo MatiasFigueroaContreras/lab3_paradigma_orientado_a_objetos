@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author emdma
  */
-public class CardsSet {
+public class CardsSet implements ICardsSet{
     private ArrayList<Card> cardsSet = new ArrayList<>();
     
     public ArrayList<Card> getCards(){
@@ -20,7 +20,7 @@ public class CardsSet {
     
     public void setCards(ArrayList<Card> newCards){
         if(isCardsSet(newCards)){
-            this.cardsSet = new ArrayList<Card>(newCards);
+            this.cardsSet = new ArrayList<>(newCards);
         }
     }
     

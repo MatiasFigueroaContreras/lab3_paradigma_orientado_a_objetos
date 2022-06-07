@@ -9,14 +9,16 @@ package lab3_paradigma_orientado_a_objetos;
  * @author emdma
  */
 public class StackPlayerVsCpuMode extends Stack{
-    public String playsOptionMenu(String status){
+    public String playsOptionMenu(DobbleGame dGame){
+        String status = dGame.getStatus();
         String str;
         
         if(status.equals("Esperando cartas en mesa")){
             str = "1. Voltear Cartas";
         }
         else if(status.equals("Cartas volteadas")){
-            str = "1. Elegir elemento en comun\n2. Pasar";
+            String cards = dGame.cardsInPlayString();
+            str = "Cartas Volteadas:\n" + cards + "\n------------\n" + "1. Elegir elemento en comun\n2. Pasar";
         }
         else if(status.equals("SpotIt") || status.equals("NotSpotIt")){
             str = "Resultado Jugada: " + status + "\n1. Siguiente jugada";

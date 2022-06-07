@@ -8,7 +8,7 @@ package lab3_paradigma_orientado_a_objetos;
  *
  * @author emdma
  */
-public class DobbleGame {
+public class DobbleGame implements IDobbleGame{
     protected GameArea gameArea;
     protected PlayersGameControl playersGameControl;
     private Mode mode;
@@ -99,11 +99,11 @@ public class DobbleGame {
     }
         
     public String cardsInPlayString(){
-        return this.gameArea.getCardsInPlay().toString();
+        return this.gameArea.cardsInPlayToString();
     }
     
     public String getPlaysOptions(){
-        return this.mode.playsOptionMenu(this.status);
+        return this.mode.playsOptionMenu(this);
     }
     
     public String toString(){

@@ -31,4 +31,8 @@ public class GameArea {
     public void setCardsInPlay(CardsSet cS){
         this.cardsInPlay = cS;
     }
+    
+    public String cardsInPlayToString(){
+        return this.cardsInPlay.toString();
+    }
 }
