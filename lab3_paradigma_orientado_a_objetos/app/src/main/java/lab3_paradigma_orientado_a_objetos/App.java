@@ -3,6 +3,11 @@
  */
 package lab3_paradigma_orientado_a_objetos;
 
+import lab3_paradigma_orientado_a_objetos.DobbleGame.CardsSet;
+import lab3_paradigma_orientado_a_objetos.DobbleGame.Dobble;
+import lab3_paradigma_orientado_a_objetos.DobbleGame.ElementsSet;
+import lab3_paradigma_orientado_a_objetos.DobbleGame.Element;
+import lab3_paradigma_orientado_a_objetos.DobbleGame.Card;
 import java.util.ArrayList;
 
 public class App {
@@ -50,7 +55,7 @@ public class App {
         System.out.println(eS.toString());
         eS.remove(1);
         System.out.println(eS.toString());
-        eS.clearOut();
+        eS.clear();
         System.out.println(eS.toString());
         eS.insertXElements(4);
         System.out.println(eS.toString());
@@ -95,7 +100,7 @@ public class App {
 
         System.out.println(c1.equals(c2));
         System.out.println(c1.equals(c2));
-        c2.clearOut();
+        c2.clear();
         c2.insertXElements(3);
         System.out.println(c1.equals(c2));
         

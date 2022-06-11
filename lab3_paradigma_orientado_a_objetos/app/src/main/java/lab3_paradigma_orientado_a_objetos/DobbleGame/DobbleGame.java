@@ -2,23 +2,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package lab3_paradigma_orientado_a_objetos;
+package lab3_paradigma_orientado_a_objetos.DobbleGame;
 
 /**
  *
  * @author emdma
  */
 public class DobbleGame implements IDobbleGame{
+    private String name;
     protected GameArea gameArea;
     protected PlayersGameControl playersGameControl;
     private Mode mode;
     private String status = "Esperando inicio del juego";
     
-    public DobbleGame(int maxP, Dobble dobbleSet, Mode mode){
+    public DobbleGame(String gameName, int maxP, Dobble dobbleSet, Mode mode){
         if(maxP <= mode.getMaxPlayers() && maxP >= mode.getMinPlayers()){
             this.gameArea = new GameArea(dobbleSet);
             this.playersGameControl = new PlayersGameControl(maxP);
             this.mode = mode;
+            this.name = gameName;
         }
     }
     
@@ -28,9 +30,9 @@ public class DobbleGame implements IDobbleGame{
         }
     }
     
-    public boolean play(int option){
+    public boolean play(String option){
         if(!this.status.equals("Juego Terminado") && !this.status.equals("Esperando inicio del juego")){
-            String newStatus = mode.playOption(this, option);
+            String newStatus = mode.play(this, option);
             if(newStatus == null){
                 return false;
             }
@@ -42,9 +44,9 @@ public class DobbleGame implements IDobbleGame{
         return false;
     }
     
-    public boolean play(int option, String[] data){
+    public boolean play(String option, String[] data){
         if(!this.status.equals("Juego Terminado") && !this.status.equals("Esperando inicio del juego")){
-            String newStatus = mode.playOption(this, option, data);
+            String newStatus = mode.play(this, option, data);
             if(newStatus == null){
                 return false;
             }
@@ -81,12 +83,17 @@ public class DobbleGame implements IDobbleGame{
         return this.mode.getVersionModeName();
     }
     
-    public String getExtraDataNeeded(int option){
+    public String getExtraDataNeeded(String option){
         return this.mode.extraDataNeeded(this.status, option);
     }
     
     public int getNumExtraDataNeded(){
         return this.mode.numExtraDataNeeded(this);
+    }
+    
+    public String getGameName(){
+        String gameNameCopy = new String(this.name);
+        return gameNameCopy;
     }
     
     public String getStatus(){
@@ -102,10 +109,19 @@ public class DobbleGame implements IDobbleGame{
         return this.gameArea.cardsInPlayToString();
     }
     
-    public String getPlaysOptions(){
-        return this.mode.playsOptionMenu(this);
+    public String[] getPlaysOptions(){
+        return this.mode.playsOptions(this);
     }
     
+    public boolean equals(Object o){
+        if(o.getClass() == getClass()){
+            DobbleGame dG = (DobbleGame)o;
+            return this.playersGameControl.equals(dG.playersGameControl) && (this.status == dG.status) && (this.mode.equals(dG.mode)); 
+        }
+        return false;
+    }
+    
+    @Override
     public String toString(){
         String modeName = "Modo de juego: " + getNameMode() + ", en su version: " + getVersionMode();
         String st = "Estado del Juego: " + getStatus();

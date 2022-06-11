@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package lab3_paradigma_orientado_a_objetos;
+package lab3_paradigma_orientado_a_objetos.DobbleGame;
 
 import static com.google.common.math.IntMath.isPrime;
 import java.util.ArrayList;
@@ -12,12 +12,12 @@ import java.util.ArrayList;
  * @author emdma
  */
 public class Dobble implements IDobble{
-    private CardsSet dobbleCS = new CardsSet();
-    private ElementsSet elements;
+    private ICardsSet dobbleCS = new CardsSet();
+    private IElementsSet elements;
     private int numE;
     private int[] elementsAppareances;
             
-    public Dobble(ElementsSet eS, int numE, int maxC){
+    public Dobble(IElementsSet eS, int numE, int maxC){
         int n = numE - 1;
         if(isPrime(numE)){
             int totalCards = totalCardsNumE(numE);
@@ -37,7 +37,7 @@ public class Dobble implements IDobble{
         }
     }
     
-    public Dobble(ElementsSet eS, int numE){
+    public Dobble(IElementsSet eS, int numE){
         if(isPrime(numE)){
             int totalCards = totalCardsNumE(numE);
             this.elements = eS;
@@ -193,7 +193,7 @@ public class Dobble implements IDobble{
         return totalCardsNumE(c.numElements());
     }
     
-    public CardsSet missingCards(){
+    public ICardsSet missingCards(){
         int numE = this.dobbleCS.nthCard(1).numElements();
         Dobble fullDobble = new Dobble(this.elements, numE, 0);
         fullDobble.dobbleCS.subtract(this.dobbleCS);
@@ -259,7 +259,12 @@ public class Dobble implements IDobble{
         return "Elements:\n" + this.elements.toString() + "\nCards:\n" + this.dobbleCS.toString();
     }
     
-    public boolean equals(Dobble d){
-        return d.dobbleCS.equals(this.dobbleCS);
+    @Override
+    public boolean equals(Object o){
+        if(o.getClass() == getClass()){
+            Dobble d = (Dobble)o;
+            return d.dobbleCS.equals(this.dobbleCS) && d.elements.equals(this.elements); 
+        }
+        return false;
     }
 }

@@ -2,38 +2,41 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package lab3_paradigma_orientado_a_objetos;
+package lab3_paradigma_orientado_a_objetos.DobbleGame;
 
 /**
  *
  * @author emdma
  */
 public class StackPlayerVsCpuMode extends Stack{
-    public String playsOptionMenu(DobbleGame dGame){
+    public String[] playsOptions(DobbleGame dGame){
         String status = dGame.getStatus();
-        String str;
+        String[] str;
         
         if(status.equals("Esperando cartas en mesa")){
-            str = "1. Voltear Cartas";
+            str = new String[1];
+            str[0] = "Voltear Cartas";
         }
         else if(status.equals("Cartas volteadas")){
-            String cards = dGame.cardsInPlayString();
-            str = "Cartas Volteadas:\n" + cards + "\n------------\n" + "1. Elegir elemento en comun\n2. Pasar";
+            str = new String[2];
+            str[0] = "Elegir elemento en comun";
+            str[1] = "Pasar";
         }
         else if(status.equals("SpotIt") || status.equals("NotSpotIt")){
-            str = "Resultado Jugada: " + status + "\n1. Siguiente jugada";
+            str = new String[1];
+            str[0] = "Siguiente jugada";
         }
         else{
-            str = "No hay opciones de juego";
+            str = null;
         }
         
         return str;
     }
     
-    public String playOption(DobbleGame dGame, int option){
+    public String play(DobbleGame dGame, String option){
         String status = dGame.getStatus();  
         if(status.equals("Esperando cartas en mesa")){
-            if(option == 1){
+            if(option.equals("Voltear Cartas")){
                 setCardsToPlay(dGame);
                 return "Cartas volteadas";
             }
@@ -42,7 +45,7 @@ public class StackPlayerVsCpuMode extends Stack{
             }
         }
         else if(status.equals("Cartas volteadas")){
-            if(option == 2){
+            if(option.equals("Pasar")){
                     backCardsInPlay(dGame);
                     return "Esperando cartas en mesa";
             }
@@ -51,7 +54,7 @@ public class StackPlayerVsCpuMode extends Stack{
             }
         }
         else if(status.equals("SpotIt") || status.equals("NotSpotIt")){
-            if(option == 1){
+            if(option.equals("Siguiente jugada")){
                     pass(dGame);
                     return "Esperando cartas en mesa";
             }
@@ -64,9 +67,9 @@ public class StackPlayerVsCpuMode extends Stack{
         }
     }
     
-    public String playOption(DobbleGame dGame, int option, String[] data){
+    public String play(DobbleGame dGame, String option, String[] data){
         if(dGame.getStatus().equals("Cartas volteadas")){
-            if(option == 1){
+            if(option.equals("Elegir elemento en comun")){
                 Element e = new Element(data[0]);
                 if(spotIt(e, dGame.gameArea.getCardsInPlay())){
                     return "SpotIt";
@@ -90,8 +93,8 @@ public class StackPlayerVsCpuMode extends Stack{
     }
     
     
-    public String extraDataNeeded(String status, int option){
-        if(status.equals("Cartas volteadas") && option == 1){
+    public String extraDataNeeded(String status, String option){
+        if(status.equals("Cartas volteadas") && option.equals("Elegir elemento en comun")){
             return "Element";
         }
         else{

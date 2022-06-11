@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package lab3_paradigma_orientado_a_objetos;
+package lab3_paradigma_orientado_a_objetos.DobbleGame;
 
 import java.util.ArrayList;
 
@@ -103,18 +103,21 @@ public class ElementsSet implements IElementsSet{
         }
     }
     
-    public boolean equals(ElementsSet eS){
-        if (numElements() == eS.numElements()){
-            for(int i = 1; i <= eS.numElements(); i++){
-                if(!contains(eS.nthElement(i))){
-                    return false;
+    @Override
+    public boolean equals(Object o){
+        if(o.getClass() == getClass()){
+            ElementsSet eS = (ElementsSet)o;
+            if (numElements() == eS.numElements()){
+                for(int i = 1; i <= eS.numElements(); i++){
+                    if(!contains(eS.nthElement(i))){
+                        return false;
+                    }
                 }
+                return true;
             }
-            return true;
         }
-        else{
-            return false;
-        }
+        
+        return false;
     }
 }
-    
+

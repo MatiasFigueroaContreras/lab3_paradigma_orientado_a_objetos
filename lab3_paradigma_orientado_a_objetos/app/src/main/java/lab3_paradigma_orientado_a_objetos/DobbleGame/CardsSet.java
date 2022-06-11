@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package lab3_paradigma_orientado_a_objetos;
+package lab3_paradigma_orientado_a_objetos.DobbleGame;
 
 import java.util.ArrayList;
 
@@ -52,7 +52,7 @@ public class CardsSet implements ICardsSet{
         }
     }
     
-    public void subtract(CardsSet cS){
+    public void subtract(ICardsSet cS){
         for(int i = 1; i <= cS.numCards(); i++){
             remove(cS.nthCard(i));
         }
@@ -91,6 +91,23 @@ public class CardsSet implements ICardsSet{
             }
         }
         return count;
+    }
+    
+    @Override
+    public boolean equals(Object o){
+        if(o.getClass() == getClass()){
+            CardsSet cS = (CardsSet)o;
+            if(cS.numCards() == numCards()){
+                for(int i = 1; i <= cS.numCards(); i++){
+                    if(!contains(cS.nthCard(i))){
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+        
+        return false;
     }
     
     @Override
