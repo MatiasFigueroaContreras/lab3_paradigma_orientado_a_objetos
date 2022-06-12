@@ -18,7 +18,7 @@ public class DobbleGame implements IDobbleGame{
     public DobbleGame(String gameName, int maxP, Dobble dobbleSet, Mode mode){
         if(maxP <= mode.getMaxPlayers() && maxP >= mode.getMinPlayers()){
             this.gameArea = new GameArea(dobbleSet);
-            this.playersGameControl = new PlayersGameControl(maxP);
+            this.playersGameControl = new PlayersGameControl(maxP + mode.getExtraPlayers());
             this.mode = mode;
             this.name = gameName;
         }
@@ -113,10 +113,11 @@ public class DobbleGame implements IDobbleGame{
         return this.mode.playsOptions(this);
     }
     
+    @Override
     public boolean equals(Object o){
         if(o.getClass() == getClass()){
             DobbleGame dG = (DobbleGame)o;
-            return this.playersGameControl.equals(dG.playersGameControl) && (this.status == dG.status) && (this.mode.equals(dG.mode)); 
+            return this.playersGameControl.equals(dG.playersGameControl) && (this.status == dG.status) && this.mode.equals(dG.mode) && this.gameArea.equals(dG.gameArea); 
         }
         return false;
     }

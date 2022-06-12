@@ -35,4 +35,13 @@ public class GameArea {
     public String cardsInPlayToString(){
         return this.cardsInPlay.toString();
     }
+    
+    @Override
+    public boolean equals(Object o){
+        if(o.getClass() == getClass()){
+            GameArea gA = (GameArea)o;
+            return this.cardsInPlay.equals(gA.cardsInPlay) && this.dobbleSet.equals(gA.cardsInPlay);
+        }
+        return false;
+    }
 }

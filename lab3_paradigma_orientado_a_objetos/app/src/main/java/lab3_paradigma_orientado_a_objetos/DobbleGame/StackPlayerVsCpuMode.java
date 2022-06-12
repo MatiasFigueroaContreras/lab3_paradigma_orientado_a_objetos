@@ -4,6 +4,8 @@
  */
 package lab3_paradigma_orientado_a_objetos.DobbleGame;
 
+import java.util.Random;
+
 /**
  *
  * @author emdma
@@ -22,12 +24,9 @@ public class StackPlayerVsCpuMode extends Stack{
             str[0] = "Elegir elemento en comun";
             str[1] = "Pasar";
         }
-        else if(status.equals("SpotIt") || status.equals("NotSpotIt")){
+        else{
             str = new String[1];
             str[0] = "Siguiente jugada";
-        }
-        else{
-            str = null;
         }
         
         return str;
@@ -40,55 +39,47 @@ public class StackPlayerVsCpuMode extends Stack{
                 setCardsToPlay(dGame);
                 return "Cartas volteadas";
             }
-            else{
-                return null;
-            }
         }
         else if(status.equals("Cartas volteadas")){
             if(option.equals("Pasar")){
                     backCardsInPlay(dGame);
                     return "Esperando cartas en mesa";
             }
-            else{
-                return null;
-            }
         }
-        else if(status.equals("SpotIt") || status.equals("NotSpotIt")){
-            if(option.equals("Siguiente jugada")){
-                    pass(dGame);
-                    return "Esperando cartas en mesa";
-            }
-            else{
-                return null;
-            }
+        else if(option.equals("Siguiente jugada")){
+            return "Esperando cartas en mesa";
         }
-        else{
-            return null;
-        }
+        return null;
+    }
+    
+    private String cpuPlay(DobbleGame dGame){
+        Random rand = new Random();
+        int randNumber = rand.nextInt(dGame.gameArea.getDobbleSet().numElements()) + 1;
+        Element e = dGame.gameArea.getDobbleSet().nthElement(randNumber);
+        String cpuStatus = spotIt(e, dGame.gameArea.getCardsInPlay());
+        return cpuStatus;
     }
     
     public String play(DobbleGame dGame, String option, String[] data){
         if(dGame.getStatus().equals("Cartas volteadas")){
             if(option.equals("Elegir elemento en comun")){
                 Element e = new Element(data[0]);
-                if(spotIt(e, dGame.gameArea.getCardsInPlay())){
-                    return "SpotIt";
-                }
-                else{
-                    return "NotSpotIt";
-                }
-                
-            }
-            else{
-                return null;
+                String playerStatus = spotIt(e, dGame.gameArea.getCardsInPlay());
+                String status = dGame.whoseTurnIsIt() + ": " + playerStatus;
+                dGame.setStatus(playerStatus);
+                pass(dGame);
+                String cpuStatus = cpuPlay(dGame);
+                status += ", " + dGame.whoseTurnIsIt() + ": " + cpuStatus;
+                dGame.setStatus(cpuStatus);
+                pass(dGame);
+                return status;
             }
         }
-        else{
-            return null;
-        }
+        return null;
     }
     
     public String start(DobbleGame dG){
+        dG.register("CPU");
         return "Esperando cartas en mesa";
     }
     
@@ -112,5 +103,14 @@ public class StackPlayerVsCpuMode extends Stack{
     
     public int getMinPlayers(){
         return 1;
+    }
+    
+    public int getExtraPlayers(){
+        return 1;
+    }
+    
+    @Override
+    public boolean equals(Object o){
+        return o.getClass() == getClass();
     }
 }

@@ -18,8 +18,13 @@ public abstract class Stack implements Mode{
         return 1;
     }
     
-    protected boolean spotIt(Element e, CardsSet cS){
-        return cS.elementOccurrences(e) >= 2;
+    protected String spotIt(Element e, CardsSet cS){
+        if (cS.elementOccurrences(e) >= 2){
+            return "SpotIt";
+        }
+        else{
+            return "NotSpotIt";
+        }
     }
     
     protected void setCardsToPlay(DobbleGame dG){
@@ -52,5 +57,6 @@ public abstract class Stack implements Mode{
         else if(dG.getStatus().equals("NotSpotIt")){
             backCardsInPlay(dG);
         }
+        dG.playersGameControl.nextTurn();
     }
 }

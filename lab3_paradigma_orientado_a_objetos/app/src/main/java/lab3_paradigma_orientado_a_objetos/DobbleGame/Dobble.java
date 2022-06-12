@@ -242,6 +242,14 @@ public class Dobble implements IDobble{
         }
     }
     
+    public int numElements(){
+        return this.elements.numElements();
+    }
+    
+    public Element nthElement(int i){
+        return this.elements.nthElement(i);
+    }
+    
     public void removeElement(int n){
         if(this.dobbleCS.numCards() == 0){
             this.elements.remove(n);

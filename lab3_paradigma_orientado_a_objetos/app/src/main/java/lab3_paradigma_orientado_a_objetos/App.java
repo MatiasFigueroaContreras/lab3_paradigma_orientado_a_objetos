@@ -9,6 +9,7 @@ import lab3_paradigma_orientado_a_objetos.DobbleGame.ElementsSet;
 import lab3_paradigma_orientado_a_objetos.DobbleGame.Element;
 import lab3_paradigma_orientado_a_objetos.DobbleGame.Card;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class App {
     public String getGreeting() {
@@ -180,5 +181,7 @@ public class App {
        dp.addCard(nCard);
        System.out.println(dp.toString());
        
+       
+
     }
 }

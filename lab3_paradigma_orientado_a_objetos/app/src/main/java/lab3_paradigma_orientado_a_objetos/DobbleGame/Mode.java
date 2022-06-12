@@ -19,4 +19,6 @@ public interface Mode {
     public int numExtraDataNeeded(DobbleGame dGame);
     public int getMaxPlayers();
     public int getMinPlayers();
+    public int getExtraPlayers();
+    public boolean equals(Object o);
 }
