@@ -27,14 +27,18 @@ public abstract class Stack implements Mode{
         }
     }
     
-    protected void setCardsToPlay(DobbleGame dG){
+    protected boolean setCardsToPlay(DobbleGame dG){
         CardsSet cards = dG.gameArea.getCardsInPlay();
         Dobble dCards = dG.gameArea.getDobbleSet();
-        for(int i = 1; i <= 2; i++){
-            cards.add(dCards.nthCard(i));
-            dCards.removeCard(i);
+        if(dCards.numCards() >= 2){
+            for(int i = 1; i <= 2; i++){
+                cards.add(dCards.nthCard(i));
+                dCards.removeCard(i);
+            }
+            return true;
         }
         
+        return false;
     }
     
     protected void backCardsInPlay(DobbleGame dG){
@@ -43,9 +47,11 @@ public abstract class Stack implements Mode{
         for(int i = 1; i <= 2; i++){
             Card nCard = cards.nthCard(i);
             dCards.addCard(nCard);
-            cards.remove(i);
         }
+        cards.clear();
     }
+    
+    
     
     protected void pass(DobbleGame dG){
         if(dG.getStatus().equals("SpotIt")){

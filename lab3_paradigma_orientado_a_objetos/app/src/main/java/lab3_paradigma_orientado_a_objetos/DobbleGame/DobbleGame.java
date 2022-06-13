@@ -113,23 +113,42 @@ public class DobbleGame implements IDobbleGame{
         return this.mode.playsOptions(this);
     }
     
+    public String getWinners(){
+        if(this.status == "Juego Terminado"){
+            return this.playersGameControl.getWinners().toString();
+        }
+        return null;
+    }
+    
+    public String getLosers(){
+        if(this.status == "Juego Terminado"){
+            return this.playersGameControl.getLosers().toString();
+        }
+        return null;
+    }
+    
     @Override
     public boolean equals(Object o){
         if(o.getClass() == getClass()){
             DobbleGame dG = (DobbleGame)o;
-            return this.playersGameControl.equals(dG.playersGameControl) && (this.status == dG.status) && this.mode.equals(dG.mode) && this.gameArea.equals(dG.gameArea); 
+            return this.name.equals(dG.getGameName()) || (this.playersGameControl.equals(dG.playersGameControl) && (this.status == dG.status) && this.mode.equals(dG.mode) && this.gameArea.equals(dG.gameArea)); 
         }
         return false;
     }
     
+    public String registeredPlayers(){
+        return this.playersGameControl.toString();
+    }
+    
     @Override
     public String toString(){
-        String modeName = "Modo de juego: " + getNameMode() + ", en su version: " + getVersionMode();
+        String gameName = "Nombre del juego: " + this.name;
+        String modeName = "\nModo de juego: " + getNameMode() + ", en su version: " + getVersionMode();
         String st = "Estado del Juego: " + getStatus();
         String cards = "Cartas en juego:\n" + cardsInPlayString();
-        String players = "Jugadores registrados:\n" + this.playersGameControl.toString();
+        String players = "Jugadores registrados:\n" + registeredPlayers();
         String jump = "\n--------------\n";
-        String strFinal = modeName + jump + st + jump + cards + jump + players;
+        String strFinal = gameName + modeName + jump + st + jump + cards + jump + players;
         if(this.status == "Juego Terminado"){
             String winners = "Ganadores:\n" + this.playersGameControl.getWinners();
             String losers = "Perdedores:\n" + this.playersGameControl.getLosers();

@@ -209,6 +209,10 @@ public class Dobble implements IDobble{
         return true;
     }
     
+    public int numCards(){
+        return this.dobbleCS.numCards();
+    }
+    
     public Card nthCard(int i){
         return this.dobbleCS.nthCard(i);
     }

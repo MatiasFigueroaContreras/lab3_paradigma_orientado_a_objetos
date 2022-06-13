@@ -66,7 +66,12 @@ public class PlayersGameControl {
     }
     
     public void nextTurn(){
-        this.playerTurn++;
+        if(this.playerTurn >= players.size()){
+            this.playerTurn = 1;
+        }
+        else{
+            this.playerTurn++;
+        }
     }
     
     private int highestScore(){

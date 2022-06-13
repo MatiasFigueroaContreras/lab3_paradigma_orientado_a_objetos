@@ -10,6 +10,7 @@ import lab3_paradigma_orientado_a_objetos.DobbleGame.Element;
 import lab3_paradigma_orientado_a_objetos.DobbleGame.Card;
 import java.util.ArrayList;
 import java.util.Scanner;
+import lab3_paradigma_orientado_a_objetos.UserMenu.UserMenu;
 
 public class App {
     public String getGreeting() {
@@ -181,7 +182,7 @@ public class App {
        dp.addCard(nCard);
        System.out.println(dp.toString());
        
-       
-
+       UserMenu um = new UserMenu();
+       um.run();
     }
 }

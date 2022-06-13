@@ -36,14 +36,16 @@ public class StackPlayerVsCpuMode extends Stack{
         String status = dGame.getStatus();  
         if(status.equals("Esperando cartas en mesa")){
             if(option.equals("Voltear Cartas")){
-                setCardsToPlay(dGame);
-                return "Cartas volteadas";
+                if(setCardsToPlay(dGame)){
+                    return "Cartas volteadas";
+                }
+                dGame.finish();
             }
         }
         else if(status.equals("Cartas volteadas")){
             if(option.equals("Pasar")){
-                    backCardsInPlay(dGame);
-                    return "Esperando cartas en mesa";
+                backCardsInPlay(dGame);
+                return "Esperando cartas en mesa";
             }
         }
         else if(option.equals("Siguiente jugada")){
@@ -68,10 +70,13 @@ public class StackPlayerVsCpuMode extends Stack{
                 String status = dGame.whoseTurnIsIt() + ": " + playerStatus;
                 dGame.setStatus(playerStatus);
                 pass(dGame);
-                String cpuStatus = cpuPlay(dGame);
-                status += ", " + dGame.whoseTurnIsIt() + ": " + cpuStatus;
-                dGame.setStatus(cpuStatus);
-                pass(dGame);
+                if(setCardsToPlay(dGame)){
+                    String cpuStatus = cpuPlay(dGame);
+                    status += ", " + dGame.whoseTurnIsIt() + ": " + cpuStatus;
+                    dGame.setStatus(cpuStatus);
+                    pass(dGame);
+                }
+                System.out.println(status);
                 return status;
             }
         }
