@@ -4,6 +4,8 @@
  */
 package lab3_paradigma_orientado_a_objetos.DobbleGame;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author emdma
@@ -15,6 +17,12 @@ public class GameArea {
     public GameArea(Dobble dS){
         this.dobbleSet = dS;
     }
+    
+    public GameArea(ArrayList<String> elements, int numE, int maxC){
+        this.dobbleSet = new Dobble(elements, numE, maxC);
+    }
+    
+    
     
     public Dobble getDobbleSet(){
         return this.dobbleSet;

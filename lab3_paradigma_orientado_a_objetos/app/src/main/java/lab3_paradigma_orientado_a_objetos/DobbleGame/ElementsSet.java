@@ -11,7 +11,19 @@ import java.util.ArrayList;
  * @author emdma
  */
 public class ElementsSet implements IElementsSet{
-    private ArrayList<Element> elementsSet = new ArrayList<>();
+    protected ArrayList<Element> elementsSet;
+    
+    public ElementsSet(){
+        this.elementsSet = new ArrayList<>();
+    }
+    
+    public ElementsSet(ArrayList<String> elements){
+        this.elementsSet = new ArrayList<>();
+        for(int i = 0; i < elements.size(); i++){
+            Element e = new Element(elements.get(i));
+            add(e);
+        }
+    }
     
     public ArrayList<Element> getElements(){
         ArrayList<Element> eSCopy = new ArrayList<>(this.elementsSet);
@@ -46,12 +58,22 @@ public class ElementsSet implements IElementsSet{
         }
     }
     
+    public void add(String e){
+        Element el = new Element(e);
+        add(el);
+    }
+    
     public void remove(int n){
         this.elementsSet.remove(n-1);
     }
     
     public void remove(Element e){
         this.elementsSet.remove(e);
+    }
+    
+    public void remove(String e){
+        Element el = new Element(e);
+        remove(el);
     }
     
     public void clear(){

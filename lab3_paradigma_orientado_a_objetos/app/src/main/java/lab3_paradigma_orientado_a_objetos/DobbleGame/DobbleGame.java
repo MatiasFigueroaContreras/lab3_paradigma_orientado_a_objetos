@@ -4,6 +4,8 @@
  */
 package lab3_paradigma_orientado_a_objetos.DobbleGame;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author emdma
@@ -15,9 +17,9 @@ public class DobbleGame implements IDobbleGame{
     private Mode mode;
     private String status = "Esperando inicio del juego";
     
-    public DobbleGame(String gameName, int maxP, Dobble dobbleSet, Mode mode){
+    public DobbleGame(String gameName, int maxP, Mode mode, ArrayList<String> elements, int numE, int maxC){
         if(maxP <= mode.getMaxPlayers() && maxP >= mode.getMinPlayers()){
-            this.gameArea = new GameArea(dobbleSet);
+            this.gameArea = new GameArea(elements, numE, maxC);
             this.playersGameControl = new PlayersGameControl(maxP + mode.getExtraPlayers());
             this.mode = mode;
             this.name = gameName;

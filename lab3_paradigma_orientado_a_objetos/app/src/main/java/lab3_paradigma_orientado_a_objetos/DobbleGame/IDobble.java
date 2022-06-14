@@ -17,9 +17,9 @@ public interface IDobble {
     public void addCard(Card c);
     public void removeCard(int n);
     public void removeCard(Card c);
-    public void addElement(Element e);
+    public void addElement(String e);
     public void removeElement(int n);
-    public void removeElement(Element e);
+    public void removeElement(String e);
     public String toString();
     public boolean equals(Object o);
 }

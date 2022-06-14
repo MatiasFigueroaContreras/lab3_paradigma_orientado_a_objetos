@@ -21,18 +21,12 @@ public class UserMenu {
     private ArrayList<DobbleGame> games = new ArrayList<>();
     private boolean salir;
     public void run(){
-        IElementsSet es = new ElementsSet();
-        Dobble d = new Dobble(es, 3, 7);
-        Mode m = new StackPlayerVsCpuMode();
-        DobbleGame dGn = new DobbleGame("Juego 1", 1, d, m);
-        this.games.add(dGn);
-        System.out.println("Juego Dobble Creado:\n" + d.toString());
         this.salir = false;
         while(!salir){
             System.out.println(mainMenuOptions());
             String opt = getOption();
             if(opt.equals("1")){
-                
+                createGameMenu();
             }
             else if(opt.equals("2")){
                 createdGamesMenu();
@@ -62,8 +56,55 @@ public class UserMenu {
         return sc.nextLine();
     }
     
+    private int getIntOption(){
+        Scanner sc = new Scanner(System.in);
+        return sc.nextInt();
+    }
+    
     private void createGameMenu(){
         
+    }
+    
+
+    
+    private int getNumElements(){
+        System.out.println("Ingrese un numero primo de elementos por carta: ");
+        return getIntOption();
+    }
+    
+    private int getMaxC(){
+        System.out.println("Ingrese el numero de cartas del mazo : ");
+        return getIntOption();
+    }
+    
+    private ArrayList<String> getElements(int numE){
+        ArrayList<String> elements = new ArrayList<>();
+        //Obtener maxima cantidad de cartas
+        int numCards = 1;
+        System.out.println("Ingrese los elementos que contendran las cartas: ");
+        for(int i = 0; i <= numCards; i++){
+            String e = getOption();
+            if(!elements.contains(e)){
+                elements.add(e);
+                System.out.println("Elemento ingresado correctamente.");
+            }
+            else{
+                System.out.println("El elemento ya ha sido ingresado.");
+                i--;
+            }
+            
+        }
+        return elements;
+    }
+    
+    private int getNumPlayers(){
+        System.out.println("Ingrese el numero maximo de jugadores a registrar: ");
+        return getIntOption();
+    }
+    
+    private String getGameName(){
+        System.out.println("Ingrese el nombre del juego a registrar: ");
+        return getOption();
     }
     
     private void createdGamesMenu(){

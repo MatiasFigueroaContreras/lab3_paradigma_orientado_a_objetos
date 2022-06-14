@@ -154,10 +154,8 @@ public class App {
        
        Dobble dp = new Dobble(3);
        dp.setElements(eS);
-       Element n5 = new Element(5);
-       Element n6 = new Element(6);
-       dp.addElement(n5);
-       dp.addElement(n6);
+       dp.addElement("5");
+       dp.addElement("6");
        dp.addCard(c1);
        dp.addCard(c3);
        dp.addCard(c1);
@@ -172,17 +170,16 @@ public class App {
        dp.setDobbleCards(cSDobble);
        System.out.println(dp.toString());
        Element n8 = new Element(8);
-       dp.addElement(n8);
+       dp.addElement("8");
        Element n2 = new Element(2);
        Element n7 = new Element(7);
        Card nCard = new Card();
        nCard.add(n2);
-       nCard.add(n5);
+       nCard.add("5");
        nCard.add(n7);
        dp.addCard(nCard);
        System.out.println(dp.toString());
-       
-       UserMenu um = new UserMenu();
-       um.run();
+       Scanner sc = new Scanner(System.in);
+       //um.run();
     }
 }

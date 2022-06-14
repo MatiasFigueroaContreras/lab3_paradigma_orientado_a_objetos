@@ -16,12 +16,15 @@ public interface IElementsSet {
     public Element nthElement(int n);
     public int numElements();
     public void add(Element e);
+    public void add(String e);
     public void insertXElements(int x);
     public void remove(int n);
     public void remove(Element e);
+    public void remove(String e);
     public void clear();
     public boolean contains(Element e);
     public int elementIndex(Element e);
     public String toString();
     public boolean equals(Object o);
+
 }

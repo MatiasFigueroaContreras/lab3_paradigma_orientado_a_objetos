@@ -4,16 +4,29 @@
  */
 package lab3_paradigma_orientado_a_objetos.DobbleGame;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author emdma
  */
 public class Card extends ElementsSet{
     
+    public Card(){
+        this.elementsSet = new ArrayList<>();
+    }
+    
+    public Card(ArrayList<String> elements){
+        this.elementsSet = new ArrayList<>();
+        for(int i = 0; i < elements.size(); i++){
+            Element e = new Element(elements.get(i));
+            add(e);
+        }
+    }
+    
     public int commonElements(Card c){
         int cont = 0;
         for(int i = 1; i <= c.numElements(); i++){
-            
             if(contains(c.nthElement(i))){
                 cont++;
             }
