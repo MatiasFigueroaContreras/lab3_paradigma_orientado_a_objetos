@@ -19,7 +19,7 @@ public class Dobble implements IDobble{
      
     public Dobble(IElementsSet eS, int numE, int maxC){
         this(numE);
-        int totalCards = totalCardsNumE(numE);
+        int totalCards = totalCardsNumElements(numE);
         if(eS.numElements() < totalCards){
             eS.insertXElements(totalCards - eS.numElements());
         }
@@ -30,7 +30,7 @@ public class Dobble implements IDobble{
     public Dobble(ArrayList<String> elements, int numE, int maxC){
         this(numE);
         IElementsSet eS = new ElementsSet(elements);
-        int totalCards = totalCardsNumE(numE);
+        int totalCards = totalCardsNumElements(numE);
         if(eS.numElements() < totalCards){
             eS.insertXElements(totalCards - eS.numElements());
         }
@@ -46,7 +46,7 @@ public class Dobble implements IDobble{
     public Dobble(int numE){
         int n = numE - 1;
         if(isPrime(n)){
-            int totalCards = totalCardsNumE(numE);
+            int totalCards = totalCardsNumElements(numE);
             this.elements = new ElementsSet();
             this.elementsAppareances = new int[totalCards];
             initElementsAppearances();
@@ -55,11 +55,11 @@ public class Dobble implements IDobble{
     }
     
     public void initDobbleCards(int maxC){
-        int totalCards = totalCardsNumE(this.numE);
+        int totalCards = totalCardsNumElements(this.numE);
         if(this.elements.numElements() >= totalCards){
             int n = this.numE - 1;
             if(maxC <= 0){
-                maxC = totalCardsNumE(numE);
+                maxC = totalCardsNumElements(numE);
             }
             firstCardGeneration(n);
             nCardsGeneration(n, maxC-1);
@@ -104,7 +104,7 @@ public class Dobble implements IDobble{
         }
     }
     
-    private int totalCardsNumE(int numE){
+    public static int totalCardsNumElements(int numE){
         return numE*numE - numE+1; 
     }
     
@@ -139,14 +139,14 @@ public class Dobble implements IDobble{
     
     public void setElements(ElementsSet newElements){
         if(this.dobbleCS.numCards() == 0){
-            if(newElements.numElements() <= totalCardsNumE(numE)){
+            if(newElements.numElements() <= totalCardsNumElements(numE)){
                 this.elements.setElements(newElements.getElements());
             }
         }
     }
     
     private boolean completeNumElements(){
-        return this.elements.numElements() == totalCardsNumE(numE);
+        return this.elements.numElements() == totalCardsNumElements(numE);
     }
     
     private boolean isDobbleCards(CardsSet cS){
@@ -187,11 +187,11 @@ public class Dobble implements IDobble{
     }
     
     public int findTotalCards(Card c){
-        return totalCardsNumE(c.numElements());
+        return totalCardsNumElements(c.numElements());
     }
     
     public int requiredElements(Card c){
-        return totalCardsNumE(c.numElements());
+        return totalCardsNumElements(c.numElements());
     }
     
     public ICardsSet missingCards(){

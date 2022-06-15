@@ -22,8 +22,6 @@ public class GameArea {
         this.dobbleSet = new Dobble(elements, numE, maxC);
     }
     
-    
-    
     public Dobble getDobbleSet(){
         return this.dobbleSet;
     }
@@ -42,6 +40,10 @@ public class GameArea {
     
     public String cardsInPlayToString(){
         return this.cardsInPlay.toString();
+    }
+    
+    public static int totalCardsNumElements(int numE){
+        return Dobble.totalCardsNumElements(numE);
     }
     
     @Override

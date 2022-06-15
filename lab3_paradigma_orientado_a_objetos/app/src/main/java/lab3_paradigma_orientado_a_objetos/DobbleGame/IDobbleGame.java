@@ -9,7 +9,7 @@ package lab3_paradigma_orientado_a_objetos.DobbleGame;
  * @author emdma
  */
 public interface IDobbleGame {
-    public void start();
+    public boolean start();
     public boolean play(String option);
     public boolean play(String option, String[] data);
     public void finish();

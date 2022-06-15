@@ -17,19 +17,43 @@ public class DobbleGame implements IDobbleGame{
     private Mode mode;
     private String status = "Esperando inicio del juego";
     
-    public DobbleGame(String gameName, int maxP, Mode mode, ArrayList<String> elements, int numE, int maxC){
-        if(maxP <= mode.getMaxPlayers() && maxP >= mode.getMinPlayers()){
-            this.gameArea = new GameArea(elements, numE, maxC);
-            this.playersGameControl = new PlayersGameControl(maxP + mode.getExtraPlayers());
-            this.mode = mode;
-            this.name = gameName;
+    public DobbleGame(String gameName, int maxP, String mode, ArrayList<String> elements, int numE, int maxC){
+        Mode m = stringToMode(mode);
+        if(m == null){
+            return;
+        }
+        if(maxP <= m.getMaxPlayers() && maxP >= m.getMinPlayers()){
+            this.playersGameControl = new PlayersGameControl(maxP + m.getExtraPlayers());
+        }
+        else{
+            this.playersGameControl = new PlayersGameControl(m.getMaxPlayers() + m.getExtraPlayers());
+        }
+        this.name = gameName;
+        this.gameArea = new GameArea(elements, numE, maxC);
+        this.mode = m;
+    }
+    
+    private Mode stringToMode(String mode){
+        switch(mode){
+            case "Stack Player vs CPU":{
+                return new StackPlayerVsCpuMode();
+            }
+            default:{
+                    return null;
+                    }
         }
     }
     
-    public void start(){
+    public static int totalCardsNumElements(int numE){
+        return GameArea.totalCardsNumElements(numE);
+    }
+    
+    public boolean start(){
         if(this.status.equals("Esperando inicio del juego") && playersGameControl.getTotalPlayers() >= this.mode.getMinPlayers()){
             this.status = mode.start(this);
+            return true;
         }
+        return false;
     }
     
     public boolean play(String option){
@@ -66,15 +90,20 @@ public class DobbleGame implements IDobbleGame{
     
     public void register(String name){
         Player p = new Player(name);
+        playersGameControl.addPlayer(p, this.mode.getExtraPlayers());
+    }
+    
+    protected void registerExtra(String name){
+        Player p = new Player(name);
         playersGameControl.addPlayer(p);
     }
     
     public String whoseTurnIsIt(){
-        return playersGameControl.nthPlayer(playersGameControl.playerTurn).getName();
+        return playersGameControl.getPlayerTurn();
     }
     
     public int getScore(String name){
-        return playersGameControl.getPlayer(name).getScore();
+        return playersGameControl.getPlayerScore(name);
     }
     
     public String getNameMode(){
@@ -106,24 +135,33 @@ public class DobbleGame implements IDobbleGame{
     protected void setStatus(String newStatus){
         this.status = new String(newStatus);
     }
+    
+    public boolean isFinished(){
+        return this.status.equals("Juego Terminado");
+    }
         
     public String cardsInPlayString(){
         return this.gameArea.cardsInPlayToString();
     }
     
     public String[] getPlaysOptions(){
-        return this.mode.playsOptions(this);
+        if(!this.status.equals("Juego Terminado")){
+            return this.mode.playsOptions(this);
+        }
+        else{
+            return new String[0];
+        }
     }
     
     public String getWinners(){
-        if(this.status == "Juego Terminado"){
+        if(this.status.equals("Juego Terminado")){
             return this.playersGameControl.getWinners().toString();
         }
-        return null;
+        return "Prueba";
     }
     
     public String getLosers(){
-        if(this.status == "Juego Terminado"){
+        if(this.status.equals("Juego Terminado")){
             return this.playersGameControl.getLosers().toString();
         }
         return null;

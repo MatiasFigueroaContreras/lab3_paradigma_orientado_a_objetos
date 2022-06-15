@@ -26,6 +26,18 @@ public class PlayersGameControl {
         return this.players.size();
     }
     
+    public String getPlayerTurn(){
+        return nthPlayer(this.playerTurn).getName();
+    }
+    
+    public int getPlayerScore(String name){
+        Player p = getPlayer(name);
+        if(p != null){
+            return p.getScore();
+        }
+        return 0;
+    }
+
     public void addScoreCurrentPlayerTurn(int score){
         nthPlayer(this.playerTurn).addScore(score);
     }
@@ -34,8 +46,14 @@ public class PlayersGameControl {
         nthPlayer(this.playerTurn).setCards(cards);
     }
         
+    public void addPlayer(Player p, int reservedSlots){
+        if((getTotalPlayers() < (this.maxPlayers - reservedSlots)) && !contains(p)){
+            this.players.add(p);
+        }
+    }
+    
     public void addPlayer(Player p){
-        if(getTotalPlayers() < this.maxPlayers && !contains(p)){
+        if((getTotalPlayers() < this.maxPlayers) && !contains(p)){
             this.players.add(p);
         }
     }

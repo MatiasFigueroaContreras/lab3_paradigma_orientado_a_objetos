@@ -84,7 +84,7 @@ public class StackPlayerVsCpuMode extends Stack{
     }
     
     public String start(DobbleGame dG){
-        dG.register("CPU");
+        dG.registerExtra("CPU");
         return "Esperando cartas en mesa";
     }
     

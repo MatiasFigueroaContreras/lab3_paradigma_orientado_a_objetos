@@ -10,6 +10,7 @@ import lab3_paradigma_orientado_a_objetos.DobbleGame.Element;
 import lab3_paradigma_orientado_a_objetos.DobbleGame.Card;
 import java.util.ArrayList;
 import java.util.Scanner;
+import lab3_paradigma_orientado_a_objetos.DobbleGame.DobbleGame;
 import lab3_paradigma_orientado_a_objetos.UserMenu.UserMenu;
 
 public class App {
@@ -179,7 +180,7 @@ public class App {
        nCard.add(n7);
        dp.addCard(nCard);
        System.out.println(dp.toString());
-       Scanner sc = new Scanner(System.in);
-       //um.run();
+       UserMenu um = new UserMenu();
+       um.run();
     }
 }
