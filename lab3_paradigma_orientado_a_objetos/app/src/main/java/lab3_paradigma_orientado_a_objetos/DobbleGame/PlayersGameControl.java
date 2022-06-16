@@ -46,14 +46,16 @@ public class PlayersGameControl {
         nthPlayer(this.playerTurn).setCards(cards);
     }
         
-    public void addPlayer(Player p, int reservedSlots){
-        if((getTotalPlayers() < (this.maxPlayers - reservedSlots)) && !contains(p)){
+    public void addPlayer(String name, int reservedSlots){
+        Player p = new Player(name);
+        if((getTotalPlayers() < (this.maxPlayers - reservedSlots)) && !contains(p) && (p.getName() != null)){
             this.players.add(p);
         }
     }
     
-    public void addPlayer(Player p){
-        if((getTotalPlayers() < this.maxPlayers) && !contains(p)){
+    public void addPlayer(String name){
+        Player p = new Player(name);
+        if((getTotalPlayers() < this.maxPlayers) && !contains(p) && (p.getName() != null)){
             this.players.add(p);
         }
     }

@@ -5,6 +5,7 @@
 package lab3_paradigma_orientado_a_objetos.DobbleGame;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -91,6 +92,18 @@ public class CardsSet implements ICardsSet{
             }
         }
         return count;
+    }
+    
+    public void mix(){
+        Random rand = new Random();
+        int randNumChanges = rand.nextInt(numCards()*2) + numCards();
+        for(int i = 1; i <= randNumChanges; i++){
+            int n = rand.nextInt(numCards()) + 1;
+            Card nCard = nthCard(n);
+            remove(n);
+            int newN = rand.nextInt(numCards());
+            this.cardsSet.add(newN, nCard);
+        }
     }
     
     @Override

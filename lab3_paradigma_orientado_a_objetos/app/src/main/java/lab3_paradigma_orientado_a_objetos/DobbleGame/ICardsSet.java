@@ -21,6 +21,7 @@ public interface ICardsSet {
     public void clear();
     public boolean contains(Card c);
     public int elementOccurrences(Element e);
+    public void mix();
     public boolean equals(Object o);
     public String toString();
     public void subtract(ICardsSet cards);

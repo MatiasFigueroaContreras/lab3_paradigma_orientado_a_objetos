@@ -11,6 +11,7 @@ import lab3_paradigma_orientado_a_objetos.DobbleGame.Card;
 import java.util.ArrayList;
 import java.util.Scanner;
 import lab3_paradigma_orientado_a_objetos.DobbleGame.DobbleGame;
+import lab3_paradigma_orientado_a_objetos.DobbleGame.Player;
 import lab3_paradigma_orientado_a_objetos.UserMenu.UserMenu;
 
 public class App {
@@ -180,6 +181,9 @@ public class App {
        nCard.add(n7);
        dp.addCard(nCard);
        System.out.println(dp.toString());
+       System.out.println("No mixed:\n" + cSDobble.toString());
+       cSDobble.mix();
+       System.out.println("Mixed:\n" + cSDobble.toString());
        UserMenu um = new UserMenu();
        um.run();
     }

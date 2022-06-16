@@ -89,13 +89,12 @@ public class DobbleGame implements IDobbleGame{
     }
     
     public void register(String name){
-        Player p = new Player(name);
-        playersGameControl.addPlayer(p, this.mode.getExtraPlayers());
+        playersGameControl.addPlayer(name, this.mode.getExtraPlayers());
     }
     
     protected void registerExtra(String name){
         Player p = new Player(name);
-        playersGameControl.addPlayer(p);
+        playersGameControl.addPlayer(name);
     }
     
     public String whoseTurnIsIt(){

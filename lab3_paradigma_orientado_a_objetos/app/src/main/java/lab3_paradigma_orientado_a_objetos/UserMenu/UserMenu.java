@@ -146,6 +146,9 @@ public class UserMenu {
             if(nameExist(name)){
                 System.out.println("El nombre ingresado ya existe, porfavor ingrese otro nombre.");
             }
+            else if(name.replace(" ", "").length() == 0){
+                System.out.println("Ingrese un nombre no vacio.");
+            }
             else{
                 return name;
             }

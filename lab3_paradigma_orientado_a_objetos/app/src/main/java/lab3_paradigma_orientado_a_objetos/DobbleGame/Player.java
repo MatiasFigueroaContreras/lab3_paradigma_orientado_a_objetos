@@ -14,8 +14,11 @@ public class Player {
     CardsSet cards = new CardsSet();
     
     public Player(String n){
-        this.name = n;
-        this.score = 0;
+        if(n.replace(" ", "").length() > 0){
+            this.name = n;
+            this.score = 0;
+        }
+
     }
     
     public void addScore(int s){
@@ -23,7 +26,9 @@ public class Player {
     }
     
     public void setName(String n){
-        this.name = n;
+        if(n.replace(" ", "").length() > 0){
+            this.name = n;
+        }
     }
     
     public void setScore(int s){

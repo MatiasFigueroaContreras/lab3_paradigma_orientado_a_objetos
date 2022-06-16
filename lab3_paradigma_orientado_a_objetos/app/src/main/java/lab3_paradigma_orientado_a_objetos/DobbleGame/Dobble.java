@@ -64,6 +64,7 @@ public class Dobble implements IDobble{
             firstCardGeneration(n);
             nCardsGeneration(n, maxC-1);
             n2CardsGeneration(n, maxC-n-1);
+            this.dobbleCS.mix();
         }      
     }
     
