@@ -18,8 +18,8 @@ public abstract class Stack implements Mode{
         return 1;
     }
     
-    protected String spotIt(Element e, CardsSet cS){
-        if (cS.elementOccurrences(e) >= 2){
+    protected String spotIt(String element, DobbleGame dG){
+        if (dG.gameArea.elementOccurrencesCardsInPlay(element) >= 2){
             return "SpotIt";
         }
         else{
@@ -28,27 +28,12 @@ public abstract class Stack implements Mode{
     }
     
     protected boolean setCardsToPlay(DobbleGame dG){
-        CardsSet cards = dG.gameArea.getCardsInPlay();
-        Dobble dCards = dG.gameArea.getDobbleSet();
-        if(dCards.numCards() >= 2){
-            for(int i = 1; i <= 2; i++){
-                cards.add(dCards.nthCard(i));
-                dCards.removeCard(i);
-            }
-            return true;
-        }
-        
-        return false;
+        dG.gameArea.setDobbleCardsInPlay(1, 2);
+        return true; //Agregar control
     }
     
     protected void backCardsInPlay(DobbleGame dG){
-        CardsSet cards = dG.gameArea.getCardsInPlay();
-        Dobble dCards = dG.gameArea.getDobbleSet();
-        for(int i = 1; i <= 2; i++){
-            Card nCard = cards.nthCard(i);
-            dCards.addCard(nCard);
-        }
-        cards.clear();
+        dG.gameArea.backCardsInPlay();
     }
     
     

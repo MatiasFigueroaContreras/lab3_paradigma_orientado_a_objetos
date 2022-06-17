@@ -11,6 +11,9 @@ import lab3_paradigma_orientado_a_objetos.DobbleGame.Card;
 import java.util.ArrayList;
 import java.util.Scanner;
 import lab3_paradigma_orientado_a_objetos.DobbleGame.DobbleGame;
+import lab3_paradigma_orientado_a_objetos.DobbleGame.ICardsSet;
+import lab3_paradigma_orientado_a_objetos.DobbleGame.IElement;
+import lab3_paradigma_orientado_a_objetos.DobbleGame.IElementsSet;
 import lab3_paradigma_orientado_a_objetos.DobbleGame.Player;
 import lab3_paradigma_orientado_a_objetos.UserMenu.UserMenu;
 
@@ -67,7 +70,7 @@ public class App {
         
         Element e = new Element("10");
         
-        ArrayList<Element> r = eS.getElements();
+        ArrayList<IElement> r = eS.getElements();
         r.add(e3);
         r.add(e);
         System.out.println(r);
@@ -76,7 +79,7 @@ public class App {
         System.out.println(eS.toString());
         eS.setElements(r);
         System.out.println(eS.toString());
-        ArrayList<Element> p = eS.getElements();
+        ArrayList<IElement> p = eS.getElements();
         p.add(e);
         eS.setElements(p);
         System.out.println(eS.toString());
@@ -165,8 +168,8 @@ public class App {
        dp.removeCard(c1);
        dp.removeCard(1);
        System.out.println(dp.toString());
-       CardsSet cSDobble = d2.getDobbleCards();
-       ElementsSet cSElements = d2.getElements();
+       ICardsSet cSDobble = d2.getDobbleCards();
+       IElementsSet cSElements = d2.getElements();
        System.out.println(cSDobble.toString());
        dp.setElements(cSElements);
        dp.setDobbleCards(cSDobble);

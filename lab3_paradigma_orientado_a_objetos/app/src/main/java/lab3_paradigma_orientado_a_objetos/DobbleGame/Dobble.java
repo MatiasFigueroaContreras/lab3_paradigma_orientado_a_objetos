@@ -8,25 +8,63 @@ import static com.google.common.math.IntMath.isPrime;
 import java.util.ArrayList;
 
 /**
- *
- * @author emdma
+ * Busca Representar un mazo de cartas Dobble con elementos que este contiene, y
+ *  respetando las propiedades de este.
+ * @author Matias Figueroa Contreras
  */
 public class Dobble implements IDobble{
+   /**
+    * El mazo de cartas como tal inicializando el mazo en uno vacio.
+    */
     private ICardsSet dobbleCS = new CardsSet();
+    
+    /**
+    * El conjunto de elementos que utilizara/estaran presentes en el mazo de 
+    *  cartas.
+    */
     private IElementsSet elements;
+    
+    /**
+    * El numero de elementos con el que se trabajara el mazo de cartas.
+    */
     private int numE;
+    
+    /**
+    *  Lista de las apariciones de los elementos en las cartas, utilizada
+    *   para facilitar la creacion parcial del mazo.
+    */
     private int[] elementsAppareances;
-     
-    public Dobble(IElementsSet eS, int numE, int maxC){
+    
+    /**
+    * <p> Constructor, completa el mazo de cartas Dobble segun una lista 
+    *       de elementos el numero de elementos por cartas, y el numero de 
+    *       cartas a crear.
+    * </p>
+    * @param elements elementos con los que se completara el mazo de cartas.
+    * @param numE numero de elementos por carta.
+    * @param maxC maximo numero de cartas que tendra el mazo de cartas.
+    * @return el objeto Dobble creado.
+    */
+    public Dobble(IElementsSet elements, int numE, int maxC){
         this(numE);
         int totalCards = totalCardsNumElements(numE);
-        if(eS.numElements() < totalCards){
-            eS.insertXElements(totalCards - eS.numElements());
+        if(elements.numElements() < totalCards){
+            elements.insertXElements(totalCards - elements.numElements());
         }
-        this.elements = eS;
+        this.elements = elements;
         initDobbleCards(maxC);
     }
 
+    /**
+    * <p> Constructor, completa el mazo de cartas segun una lista de String que
+    *       representa los elementos, el numero de elementos por cartas, 
+    *       y el numero de cartas a crear.
+    * </p>
+    * @param elements elementos con los que se completara el mazo de cartas.
+    * @param numE numero de elementos por carta.
+    * @param maxC maximo numero de cartas que tendra el mazo de cartas.
+    * @return el objeto Dobble creado.
+    */
     public Dobble(ArrayList<String> elements, int numE, int maxC){
         this(numE);
         IElementsSet eS = new ElementsSet(elements);
@@ -38,11 +76,28 @@ public class Dobble implements IDobble{
         initDobbleCards(maxC);
     }
     
-    public Dobble(IElementsSet eS, int numE){
+    
+    /**
+    * <p> Constructor, inicializa la lista de elementos y el numero de elemntos
+    *       por carta, sin completar el mazo.
+    * </p>
+    * @param elements elementos con los que se completara el mazo de cartas.
+    * @param numE numero de elementos por carta.
+    * @return el objeto Dobble creado.
+    */
+    public Dobble(IElementsSet elements, int numE){
         this(numE);
-        this.elements = eS;
+        this.elements = elements;
     }
     
+    /**
+    * <p> Constructor, inicializa el numero de elementos que se utilizaran por
+    *       carta, sin completar el mazo, ni saber los elementos que este
+    *       contendra, creando una lista vacia de estos.
+    * </p>
+    * @param numE numero de elementos por carta.
+    * @return el objeto Dobble creado.
+    */
     public Dobble(int numE){
         int n = numE - 1;
         if(isPrime(n)){
@@ -54,6 +109,12 @@ public class Dobble implements IDobble{
         }
     }
     
+    /**
+    * <p> Crea el mazo de cartas Dobble con una cantidad maxima de cartas
+    *       especificada, esto si existen todos los elementos necesarios.
+    * </p>
+    * @param maxC maximo numero de cartas que tendra el mazo de cartas.
+    */
     public void initDobbleCards(int maxC){
         int totalCards = totalCardsNumElements(this.numE);
         if(this.elements.numElements() >= totalCards){
@@ -61,6 +122,7 @@ public class Dobble implements IDobble{
             if(maxC <= 0){
                 maxC = totalCardsNumElements(numE);
             }
+            this.dobbleCS.clear();
             firstCardGeneration(n);
             nCardsGeneration(n, maxC-1);
             n2CardsGeneration(n, maxC-n-1);
@@ -68,6 +130,11 @@ public class Dobble implements IDobble{
         }      
     }
     
+    /**
+    * <p> Crea la primera carta del mazo Dobble, y la agrega a este.
+    * </p>
+    * @param n numero de elementos (this.numE) menos 1.
+    */
     private void firstCardGeneration(int n){
         Card card = new Card();
         for(int i = 1; i <= n+1; i++){
@@ -77,6 +144,12 @@ public class Dobble implements IDobble{
         this.dobbleCS.add(card);
     }
     
+    /**
+    * <p> Crea n cartas del mazo Dobble, y las agrega a este.
+    * </p>
+    * @param n numero de elementos (this.numE) menos 1.
+    * @param maxC maximo de cartas a crear.
+    */
     private void nCardsGeneration(int n, int maxC){
         for(int i = 1; i <= n && maxC > 0; i++, maxC--){
             Card card = new Card();
@@ -90,6 +163,12 @@ public class Dobble implements IDobble{
         }
     }
     
+    /**
+    * <p> Crea n**2 cartas del mazo Dobble, y las agrega a este.
+    * </p>
+    * @param n numero de elementos (this.numE) menos 1.
+    * @param maxC maximo de cartas a crear.
+    */
     private void n2CardsGeneration(int n, int maxC){
         for(int i = 1; i <= n; i++){
             for(int j = 1; j <= n && maxC > 0; j++, maxC--){
@@ -105,23 +184,45 @@ public class Dobble implements IDobble{
         }
     }
     
+    /**
+    * <p> Calcula el maximo de cartas que se pueden crear segun el numero de
+    *       elementos que estas contienen, es decir el mazo completo Dobble.
+    * </p>
+    * @param numE numero de elementos por carta.
+    */
     public static int totalCardsNumElements(int numE){
         return numE*numE - numE+1; 
     }
     
+    /**
+    * <p> Inicializa el numero de apariciones de los elementos en 0.
+    * </p>
+    */
     private void initElementsAppearances(){
         for(int i = 0; i < this.elementsAppareances.length; i++){
             this.elementsAppareances[i] = 0;
         }
     }
     
-    public CardsSet getDobbleCards(){
+    /**
+    * <p> Getter.
+    * </p>
+    * @return una copia del mazo de cartas Dobble.
+    */
+    public ICardsSet getDobbleCards(){
         CardsSet dobbleCSCopy = new CardsSet();
         dobbleCSCopy.setCards(this.dobbleCS.getCards());
         return dobbleCSCopy;
     }
     
-    public void setDobbleCards(CardsSet newDobbleCards){
+    /**
+    * <p> Setter, que cambia this.dobbleCS por una copia del nuevo mazo de
+    *       cartas verificando que esta cumpla con las caracteristicas de un
+    *       mazo Dobble.
+    * </p>
+    * @param newDobbleCards mazo de cartas a setear.
+    */
+    public void setDobbleCards(ICardsSet newDobbleCards){
         if(completeNumElements()){
             int[] copyEA = this.elementsAppareances.clone();
             initElementsAppearances();
@@ -131,14 +232,27 @@ public class Dobble implements IDobble{
             this.elementsAppareances = copyEA;
         }
     }
-
-    public ElementsSet getElements(){
-        ElementsSet elementsCopy = new ElementsSet();
+    
+    /**
+    * <p> Getter.
+    * </p>
+    * @return una copia de los elementos del mazo de cartas.
+    */
+    public IElementsSet getElements(){
+        IElementsSet elementsCopy = new ElementsSet();
         elementsCopy.setElements(this.elements.getElements());
         return elementsCopy;
     }
     
-    public void setElements(ElementsSet newElements){
+    /**
+    * <p> Setter, que cambia this.elements por una copia del nuevo conjunto de
+    *       elementos, para esto se verifica que no existan cartas en el mazo
+    *       Dobble, y que la lista de elementos no supere el maximo de elementos
+    *       que tendra el mazo.
+    * </p>
+    * @param newElements conjunto de elementos a setear.
+    */
+    public void setElements(IElementsSet newElements){
         if(this.dobbleCS.numCards() == 0){
             if(newElements.numElements() <= totalCardsNumElements(numE)){
                 this.elements.setElements(newElements.getElements());
@@ -146,16 +260,28 @@ public class Dobble implements IDobble{
         }
     }
     
+    /**
+    * <p> Consulta si el conjunto de elementos esta completo
+    * </p>
+    * @return true si el conjunto esta completo, false si no lo esta.
+    */
     private boolean completeNumElements(){
         return this.elements.numElements() == totalCardsNumElements(numE);
     }
     
-    private boolean isDobbleCards(CardsSet cS){
-        for(int i = 1; i <= cS.numCards(); i++){
-            Card nCard = cS.nthCard(i);
+    /**
+    * <p> Consulta si el un conjunto de cartas cumple con las caracteristicas
+    *       de un mazo Dobble.
+    * </p>
+    * @param cards conjunto de cartas a verificar.
+    * @return true si el conjunto de cartas es Dobble, false si no lo es.
+    */
+    private boolean isDobbleCards(ICardsSet cards){
+        for(int i = 1; i <= cards.numCards(); i++){
+            Card nCard = cards.nthCard(i);
             if(addElementsAppearences(nCard, this.elementsAppareances)){
-                for(int j = i + 1; j <= cS.numCards(); j++){
-                    if(!nCard.oneCommonElement(cS.nthCard(j))){
+                for(int j = i + 1; j <= cards.numCards(); j++){
+                    if(!nCard.oneCommonElement(cards.nthCard(j))){
                         return false;
                     }
                 }               
@@ -167,9 +293,20 @@ public class Dobble implements IDobble{
         return true;
     }
     
-    private boolean addElementsAppearences(Card c, int[] elementsA){
-        for(int i = 1; i <= c.numElements(); i++){      
-            int eIndex = this.elements.elementIndex(c.nthElement(i)) - 1;
+    /**
+    * <p> Agrega las apariciones de los elementos de una carta a una lista 
+    *       de enteros que contiene las aparaiciones, sin pasarse del maximo
+    *       de elementos que pueden aparecer (segun las caracteristicas de un
+    *       mazo Dobble).
+    * </p>
+    * @param card carta de la cual se contaran las apariciones de los elementos.
+    * @param elementsA lista con las apariciones de los elementos.
+    * @return true si las apariciones cumplieron con las caracteristicas, false
+    *           si no las cumplieron.
+    */
+    private boolean addElementsAppearences(Card card, int[] elementsA){
+        for(int i = 1; i <= card.numElements(); i++){      
+            int eIndex = this.elements.elementIndex(card.nthElement(i)) - 1;
             if(eIndex <= -1 || (elementsA[eIndex] + 1) > this.numE){
                 return false;
             }
@@ -180,21 +317,48 @@ public class Dobble implements IDobble{
         return true;
     }
     
-    private void resElementsAppearences(Card c){
-        for(int i = 1; i <= c.numElements(); i++){
-            int eIndex = this.elements.elementIndex(c.nthElement(i)) - 1;
+    /**
+    * <p> Resta las apariciones de los elementos de una carta de la lista con
+    *       el conteo de las apariciones (this.elementsAppareances).
+    * </p>
+    * @param card carta de la cual se quitaran las apariciones de los elementos.
+    */
+    private void resElementsAppearences(Card card){
+        for(int i = 1; i <= card.numElements(); i++){
+            int eIndex = this.elements.elementIndex(card.nthElement(i)) - 1;
             this.elementsAppareances[eIndex]--;
         }
     }
     
-    public int findTotalCards(Card c){
-        return totalCardsNumElements(c.numElements());
+    /**
+    * <p> Calcula el total de cartas que contendra un mazo Dobble completo, a
+    *       travez de una carta.
+    * </p>
+    * @param card carta de la cual se obtendra el numero de elementos.
+    * @return numero total de cartas de un mazo Dobble completo.
+    */
+    public int findTotalCards(Card card){
+        return totalCardsNumElements(card.numElements());
     }
     
-    public int requiredElements(Card c){
-        return totalCardsNumElements(c.numElements());
+    /**
+    * <p> Calcula el total de elementos que se necesitan para crear un mazo 
+    *       Dobble completo, a travez de una carta.
+    * </p>
+    * @param card carta de la cual se obtendra el numero de elementos.
+    * @return numero total de elementos necesarios para crear un mazo Dobble
+    *          completo.
+    */
+    public int requiredElements(Card card){
+        return totalCardsNumElements(card.numElements());
     }
     
+    /**
+    * <p> Encuentra las cartas faltantes para que el mazo Dobble (this.dobbleCS)
+    *       este completo.
+    * </p>
+    * @return las cartas faltantes para que el mazo Dobble este completo.
+    */
     public ICardsSet missingCards(){
         int numE = this.dobbleCS.nthCard(1).numElements();
         Dobble fullDobble = new Dobble(this.elements, numE, 0);
@@ -202,77 +366,155 @@ public class Dobble implements IDobble{
         return fullDobble.dobbleCS;
     }
     
-    public boolean isValidCard(Card c){
+    /**
+    * <p> Consulta si una carta es valida para el mazo Dobble (this.dobbleCS)
+    * </p>
+    * @param card carta a verificar si es valida.
+    * @return true si la carta es valida, false sino lo es.
+    */
+    public boolean isValidCard(Card card){
         for(int i = 1; i <= this.dobbleCS.numCards(); i++){
-            if(!this.dobbleCS.nthCard(i).oneCommonElement(c)){
+            if(!this.dobbleCS.nthCard(i).oneCommonElement(card)){
                 return false;
             }
         }
         return true;
     }
     
+    /**
+    * <p> Cantidad de cartas que tiene el mazo Dobble.
+    * </p>
+    * @return cantidad de cartas del mazo Dobble.
+    */
     public int numCards(){
         return this.dobbleCS.numCards();
     }
     
+    /**
+    * <p> Busca la nth Carta del mazo Dobble, partiendo desde 1.
+    * </p>
+    * @param n indice (nth) a buscar en el mazo.
+    * @return la nth carta buscada.
+    */
     public Card nthCard(int i){
         return this.dobbleCS.nthCard(i);
     }
     
-    public void addCard(Card c){
+    /**
+    * <p> Añade una carta al mazo, respetando que este cumpla con las 
+    *       caracteristicas de un mazo Dobble.
+    * </p>
+    * @param card carta a agregar al mazo Dobble.
+    */
+    public void addCard(Card card){
         if(completeNumElements()){
-            System.out.println();
             int[] copyEA = this.elementsAppareances.clone();
-            if(addElementsAppearences(c, copyEA)){
-                if(isValidCard(c)){
-                    this.dobbleCS.add(c);
+            if(addElementsAppearences(card, copyEA)){
+                if(isValidCard(card)){
+                    this.dobbleCS.add(card);
                     this.elementsAppareances = copyEA;
                 }
             }           
         }
     }
-    
+
+    /**
+    * <p> Elimina la nth Carta del mazo Dobble y por lo tanto resta las
+    *       apariciones de esta.
+    * </p>
+    * @param n nth carta a eliminar del mazo.
+    */
     public void removeCard(int n){
         resElementsAppearences(this.dobbleCS.nthCard(n));
         this.dobbleCS.remove(n);
     }
     
-    public void removeCard(Card c){
-        this.dobbleCS.remove(c);
-        resElementsAppearences(c);
+    /**
+    * <p> Elimina la Carta del mazo Dobble si es que forma parte de este,
+    *       y si lo logra resta las apariciones de esta.
+    * </p>
+    * @param card carta a eliminar del mazo.
+    */
+    public void removeCard(Card card){
+        this.dobbleCS.remove(card);
+        resElementsAppearences(card);
     }
     
-    public void addElement(String e){
+    /**
+    * <p> Añade un elemento al conjunto de elementos que se utiliza en el mazo
+    *       si es que este no esta completo.
+    * </p>
+    * @param element elemento representado en String a agregar al conjunto.
+    */
+    public void addElement(String element){
         if(!completeNumElements()){
-            this.elements.add(e);
+            this.elements.add(element);
         }
     }
     
+    /**
+    * <p> Cuenta la cantidad de elementos del conjunto de estos (this.elements).
+    * </p>
+    * @return la cantidad de elementos del conjunto.
+    */
     public int numElements(){
         return this.elements.numElements();
     }
     
-    public Element nthElement(int i){
-        return this.elements.nthElement(i);
+    /**
+    * <p> Busca el nth Elemento en su forma de String del conjunto, 
+    *       partiendo desde 1.
+    * </p>
+    * @param n indice (nth) a buscar en el conjunto.
+    * @return el nth elemento buscado en su representacion de String.
+    */
+    public String nthElement(int i){
+        return this.elements.nthElementString(i);
     }
     
+    /**
+    * <p> Elimina el nth Elemento del conjunto (this.elements) (partiendo de 1).
+    * </p>
+    * @param n nth elemento a eliminar del conjunto (this.elements).
+    */
     public void removeElement(int n){
         if(this.dobbleCS.numCards() == 0){
             this.elements.remove(n);
         }
     }
     
+    /**
+    * <p> Elimina el elemento dado en forma de String si es que se encuentra 
+    *       en el conjunto (this.elements).
+    * </p>
+    * @param element elemento a eliminar del conjunto (this.elements), 
+    *           en su forma de String.
+    */
     public void removeElement(String e){
         if(this.dobbleCS.numCards() == 0){
             this.elements.remove(e);
         }
     }
     
+    /**
+    * <p> Pasa la representacion del mazo Dobble a String.
+    * </p>
+    * @return String en representacion del mazo Dobble, con los elementos que
+    *           contiene, y cartas del mazo.
+    */
     @Override
     public String toString(){
         return "Elements:\n" + this.elements.toString() + "\nCards:\n" + this.dobbleCS.toString();
     }
-    
+
+    /**
+    * <p> Compara this con otro Objeto, para esto compara si son de la misma
+    *      clase (Dobble) y luego si los dos conjuntos poseen los mismos valores
+    *      de cartas y elementos del mazo.
+    * </p>
+    * @param object objeto a comparar con this.
+    * @return true si son iguales, false si no son iguales.
+    */
     @Override
     public boolean equals(Object o){
         if(o.getClass() == getClass()){

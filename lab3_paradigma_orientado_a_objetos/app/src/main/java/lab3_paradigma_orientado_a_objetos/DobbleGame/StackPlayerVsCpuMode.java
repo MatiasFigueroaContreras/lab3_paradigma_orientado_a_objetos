@@ -57,16 +57,16 @@ public class StackPlayerVsCpuMode extends Stack{
     private String cpuPlay(DobbleGame dGame){
         Random rand = new Random();
         int randNumber = rand.nextInt(dGame.gameArea.getDobbleSet().numElements()) + 1;
-        Element e = dGame.gameArea.getDobbleSet().nthElement(randNumber);
-        String cpuStatus = spotIt(e, dGame.gameArea.getCardsInPlay());
+        String element = dGame.gameArea.nthElement(randNumber);
+        String cpuStatus = spotIt(element, dGame);
         return cpuStatus;
     }
     
     public String play(DobbleGame dGame, String option, String[] data){
         if(dGame.getStatus().equals("Cartas volteadas")){
             if(option.equals("Elegir elemento en comun")){
-                Element e = new Element(data[0]);
-                String playerStatus = spotIt(e, dGame.gameArea.getCardsInPlay());
+                String element = data[0];
+                String playerStatus = spotIt(element, dGame);
                 String status = dGame.whoseTurnIsIt() + ": " + playerStatus;
                 dGame.setStatus(playerStatus);
                 pass(dGame);
@@ -76,7 +76,9 @@ public class StackPlayerVsCpuMode extends Stack{
                     dGame.setStatus(cpuStatus);
                     pass(dGame);
                 }
-                System.out.println(status);
+                else{
+                    dGame.playersGameControl.nextTurn();
+                }
                 return status;
             }
         }
@@ -99,7 +101,7 @@ public class StackPlayerVsCpuMode extends Stack{
     }
     
     public String getVersionModeName(){
-        return "Player vs Cpu";
+        return "Player vs CPU";
     }
     
     public int getMaxPlayers(){

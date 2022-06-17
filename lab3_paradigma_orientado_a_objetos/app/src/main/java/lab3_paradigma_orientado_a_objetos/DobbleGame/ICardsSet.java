@@ -13,16 +13,17 @@ import java.util.ArrayList;
 public interface ICardsSet {
     public ArrayList<Card> getCards();
     public void setCards(ArrayList<Card> cards);
-    public void add(Card c);
+    public void add(Card card);
     public Card nthCard(int n);
     public int numCards();
+    public void union(ICardsSet cS);
+    public void subtract(ICardsSet cS);
     public void remove(int n);
-    public void remove(Card c);
+    public void remove(Card card);
     public void clear();
-    public boolean contains(Card c);
-    public int elementOccurrences(Element e);
+    public boolean contains(Card card);
+    public int elementOccurrences(String element);
     public void mix();
-    public boolean equals(Object o);
+    public boolean equals(Object object);
     public String toString();
-    public void subtract(ICardsSet cards);
 }
