@@ -3,18 +3,6 @@
  */
 package lab3_paradigma_orientado_a_objetos;
 
-import lab3_paradigma_orientado_a_objetos.DobbleGame.CardsSet;
-import lab3_paradigma_orientado_a_objetos.DobbleGame.Dobble;
-import lab3_paradigma_orientado_a_objetos.DobbleGame.ElementsSet;
-import lab3_paradigma_orientado_a_objetos.DobbleGame.Element;
-import lab3_paradigma_orientado_a_objetos.DobbleGame.Card;
-import java.util.ArrayList;
-import java.util.Scanner;
-import lab3_paradigma_orientado_a_objetos.DobbleGame.DobbleGame;
-import lab3_paradigma_orientado_a_objetos.DobbleGame.ICardsSet;
-import lab3_paradigma_orientado_a_objetos.DobbleGame.IElement;
-import lab3_paradigma_orientado_a_objetos.DobbleGame.IElementsSet;
-import lab3_paradigma_orientado_a_objetos.DobbleGame.Player;
 import lab3_paradigma_orientado_a_objetos.UserMenu.UserMenu;
 
 public class App {
@@ -23,7 +11,11 @@ public class App {
     }
 
     public static void main(String[] args) {
-        //Prueba de Element
+       UserMenu um = new UserMenu();
+       um.run();
+       
+       /* Pruebas realizadas si se desean utilizar agregar el import correspondiente
+       ¨//Prueba de Element
         System.out.println("Element:");
         Element e1 = new Element(1);
         Element e2 = new Element("2");
@@ -136,26 +128,6 @@ public class App {
         System.out.println(d2.missingCards().toString());
         System.out.println(d2.toString());
         System.out.println(d2.toString());
-
-        
-       int z = 3;
-       int j = z;
-       j++;
-       System.out.println(z);
-       
-       int[] prueba = new int[]{1, 2, 3, 4};
-       int[] prueba2 = prueba.clone();
-       prueba2[0]++;
-       prueba2[1]++;
-       prueba2[2]--;
-        System.out.println("\n");
-       for(int i = 0; i < prueba.length; i++){
-           System.out.println(prueba[i]);
-       }
-       System.out.println("\n");
-       for(int aa = 0; aa < prueba2.length; aa++){
-           System.out.println(prueba2[aa]);
-       }
        
        Dobble dp = new Dobble(3);
        dp.setElements(eS);
@@ -187,7 +159,6 @@ public class App {
        System.out.println("No mixed:\n" + cSDobble.toString());
        cSDobble.mix();
        System.out.println("Mixed:\n" + cSDobble.toString());
-       UserMenu um = new UserMenu();
-       um.run();
+       */
     }
 }

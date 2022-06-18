@@ -82,12 +82,32 @@ public class PlayersGameControl {
     }
     
     /**
+    * <p> Suma el puntaje dado al jugador con el nombre dado.
+    * </p>
+    * @param score puntaje a sumar.
+    * @param name nombre del jugador a sumar el puntaje.
+    */   
+    public void addScorePlayer(int score, String name){
+        getPlayer(name).addScore(score);
+    }
+    
+    /**
     * <p> Agrega cartas dadas al jugador que tiene el turno actual.
     * </p>
     * @param cards cartas a agregar.
     */ 
     public void addCardsCurrentPlayerTurn(CardsSet cards){
         nthPlayer(this.playerTurn).addCards(cards);
+    }
+    
+    /**
+    * <p> Agrega cartas dado al jugador con el nombre dado.
+    * </p>
+    * @param cards cartas a agregar.
+    * @param name nombre del jugador a agregar las cartas.
+    */  
+    public void addCardsPlayer(CardsSet cards, String name){
+        getPlayer(name).addCards(cards);
     }
 
     /**

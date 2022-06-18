@@ -7,7 +7,7 @@ package lab3_paradigma_orientado_a_objetos.DobbleGame;
 /**
  * La clase Element, busca representar los elementos que estara presente en las
  *  cartas, de una manera mas estandarizada.
- * @author Matías Figueroa Contreras
+ * @author Matias Figueroa Contreras
  */
 public class Element implements IElement{
     /**

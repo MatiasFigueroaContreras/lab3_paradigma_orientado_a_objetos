@@ -135,6 +135,23 @@ public class ElementsSet implements IElementsSet{
     }
     
     /**
+    * <p> Agrega x cantidad de elementos al conjunto
+    * </p>
+    * @param x cantidad de elementos a agregar.
+    */
+    public void insertXElements(int x){
+        for(int i = 1; i <= x; i++){
+            Element eX = new Element(i);
+            if(contains(eX)){
+                x++;
+            }
+            else{
+                add(eX);
+            }
+        }
+    }
+    
+    /**
     * <p> Elimina el nth Elemento del conjunto (partiendo de 1).
     * </p>
     * @param n nth elemento a eliminar del conjunto.
@@ -169,23 +186,6 @@ public class ElementsSet implements IElementsSet{
     */
     public void clear(){
         this.elementsSet.clear();
-    }
-    
-    /**
-    * <p> Agrega x cantidad de elementos al conjunto
-    * </p>
-    * @param x cantidad de elementos a agregar.
-    */
-    public void insertXElements(int x){
-        for(int i = 1; i <= x; i++){
-            Element eX = new Element(i);
-            if(contains(eX)){
-                x++;
-            }
-            else{
-                add(eX);
-            }
-        }
     }
     
     /**

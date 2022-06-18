@@ -5,8 +5,8 @@
 package lab3_paradigma_orientado_a_objetos.DobbleGame;
 
 /**
- * Representa a un jugador con su nombre puntaje y cartas asociadas.
- * @author Matías Figueroa Contreras 
+ * Representa a un jugador con su nombre, puntaje y cartas asociadas.
+ * @author Matï¿½as Figueroa Contreras 
  */
 public class Player {
     /**

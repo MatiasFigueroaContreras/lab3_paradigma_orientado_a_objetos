@@ -6,7 +6,7 @@ package lab3_paradigma_orientado_a_objetos.DobbleGame;
 
 /**
  *
- * @author emdma
+ * @author Matias Figueroa Conteras
  */
 public interface IDobbleGame {
     public boolean start();
@@ -16,8 +16,9 @@ public interface IDobbleGame {
     public void register(String name);
     public String whoseTurnIsIt();
     public int getScore(String name);
-    public String getNameMode();
+    public String getNameOfMode();
     public String getVersionMode();
     public String getStatus();
     public String toString();
+    public boolean equals(Object o);
 }

@@ -5,7 +5,7 @@
 package lab3_paradigma_orientado_a_objetos.DobbleGame;
 
 /**
- * Interfaz que busca estandarisar y definir las acciones que tiene que realizar
+ * Interfaz que busca estandarizar y definir las acciones que tiene que realizar
  *  un elemento
  * @author Matias Figueroa Contreras
  */

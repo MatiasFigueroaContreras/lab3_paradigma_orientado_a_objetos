@@ -87,15 +87,27 @@ public class CardsSet implements ICardsSet{
         return this.cardsSet.size();
     }
     
-    public void union(ICardsSet cS){
-        for(int i = 1; i <= cS.numCards(); i++){
-            add(cS.nthCard(i));
+    /**
+    * <p> Une un conjunto de cartas dado con this, respetando la union
+    *       de conjuntos conocida.
+    * </p>
+    * @param cards cartas a unir con this.
+    */
+    public void union(ICardsSet cards){
+        for(int i = 1; i <= cards.numCards(); i++){
+            add(cards.nthCard(i));
         }
     }
     
-    public void subtract(ICardsSet cS){
-        for(int i = 1; i <= cS.numCards(); i++){
-            remove(cS.nthCard(i));
+    /**
+    * <p> Hace una resta de conjuntos entre las cartas dadas y this, respetando
+    *       la reste de conjuntos conocidas.
+    * </p>
+    * @param cards cartas a restar con this.
+    */
+    public void subtract(ICardsSet cards){
+        for(int i = 1; i <= cards.numCards(); i++){
+            remove(cards.nthCard(i));
         }
     }
     

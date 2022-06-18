@@ -382,15 +382,6 @@ public class Dobble implements IDobble{
     }
     
     /**
-    * <p> Cantidad de cartas que tiene el mazo Dobble.
-    * </p>
-    * @return cantidad de cartas del mazo Dobble.
-    */
-    public int numCards(){
-        return this.dobbleCS.numCards();
-    }
-    
-    /**
     * <p> Busca la nth Carta del mazo Dobble, partiendo desde 1.
     * </p>
     * @param n indice (nth) a buscar en el mazo.
@@ -398,6 +389,15 @@ public class Dobble implements IDobble{
     */
     public Card nthCard(int i){
         return this.dobbleCS.nthCard(i);
+    }
+    
+    /**
+    * <p> Cantidad de cartas que tiene el mazo Dobble.
+    * </p>
+    * @return cantidad de cartas del mazo Dobble.
+    */
+    public int numCards(){
+        return this.dobbleCS.numCards();
     }
     
     /**

@@ -10,8 +10,9 @@ import java.util.Scanner;
 import lab3_paradigma_orientado_a_objetos.DobbleGame.DobbleGame;
 
 /**
- *
- * @author emdma
+ * Menu de Usuario el cual tiene todo lo referente a la interuaccion del usuario
+ *  con los juegos Dobble.
+ * @author Matias Figueroa Contreras
  */
 public class UserMenu {
     private ArrayList<DobbleGame> games = new ArrayList<>();
@@ -264,7 +265,7 @@ public class UserMenu {
     }
     
     private void printGameMode(DobbleGame dG){
-        System.out.println("Modo de juego: " + dG.getNameMode() + ", en su version: " + dG.getVersionMode());
+        System.out.println("Modo de juego: " + dG.getNameOfMode() + ", en su version: " + dG.getVersionMode());
     }
     
     private void printRegisteredPlayers(DobbleGame dG){
