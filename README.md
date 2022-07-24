@@ -1,1 +1,1 @@
-# lab3_20945996_Figueroa
+LAB 3 Paradigmas de Programacion | Paradigma Orientado a Objetos | Java
